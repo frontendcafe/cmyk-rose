@@ -1,9 +1,10 @@
+<!-- @format -->
+
 # Proyecto CMYK++ - Rose
 
-Repositorio para proyecto de la segunda versión de CMYK, para el grupo color rose.
+Para los iconos pueden buscar aquí:
+https://icons8.com/icon/set/weather/ios-glyphs
 
-## ***Integrantes*** :student:
+## Assets:
 
- * _Daniel Alfaro_
- * _Maria Laura Ojeda_
- * _Derlys Dominguez_
+Contiene el Logo, las imágenes de fondo para los diferentes climas. los iconos para el menú y los mockups con la guía de estilo
