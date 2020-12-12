@@ -1,6 +1,6 @@
 const ciudad = document.querySelector('.titulo');
 const containerTitulo = document.querySelector('.container__titulo');
-const fecha = document.querySelector('.hora');
+const fecha = document.querySelector('.fechayhora');
 
 //Ubicación actual con geolocation y luego con geocode
 const obtenerUbicacionActual = function () {
