@@ -1,3 +1,8 @@
+/** @format */
+
 h1 {
-  color: green;
+    color: green;
+}
+.hide {
+    display: none;
 }
