@@ -1,9 +1,89 @@
-/* variables */
-
-h1 {
-  color: green;
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+  scroll-behavior: smooth;
 }
 
-.header {
-  background-color: ;
+/* variables */
+:root {
+  --nav-bg-color: #f36b7f;
+  --main-bg-color: #3040c4;
+  --resultados-color: #f8cf61;
+  --text-white-color: #fff;
+  --text-black-color: black;
+}
+
+body {
+  box-sizing: border-box;
+}
+
+h2 {
+  /* color: green; */
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: var(--nav-bg-color);
+  height: 8vh;
+  align-items: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 3;
+  padding: 15px;
+  background-color: var(--main-bg-color);
+  height: 95vh;
+}
+
+.container-resultados__pronostico {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  margin: 10px 0px;
+}
+
+.container-resultados__pronostico--titulo {
+  text-transform: uppercase;
+  color: var(--text-white-color);
+}
+
+.container-resultados__pronostico--fechayhora {
+  color: var(--resultados-color);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.container-resultados__datosciudad {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  margin: 30px 0px;
+}
+
+.container-resultados__datosciudad--info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.container-resultados_datosciudad--descripcion {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-resultados__datosciudad--descripcionbtn {
+  cursor: pointer;
 }
