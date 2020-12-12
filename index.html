@@ -4,45 +4,63 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css">
-
+    <link href="styles.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <title>Clima App</title>
 </head>
 
 <body>
     <main class="container">
-        <div class="">
-            <input type="text" class="form-input" placeholder="Ciudad" name="ciudad" id="ciudad">
+        <header>
+            <img class="rose" src="assets/logo.png" alt="">
+            <nav id="site-nav" class="site-nav">
+                <ul>
+                    <li><strong><a href="#">HOME</a></strong></li>
+                    <li><strong><a href="#">ACERCA DE</a></strong></li>
+                    <li><strong><a href="#">CONTACTO</a></strong></li>
+                </ul>
+            </nav>
+            <div id="menu-toggle" class="menu-toggle" onClick="cambiarClase()">
+                <div class="hamburger"></div>
+            </div>
+        </header>
+
+        <section>
+            <div class="container__titulo">
+                <h1 class="titulo"></h1>
+            </div>
+            <div class="container__hora">
+                <h2 class="hora"></h2>
+            </div>
             <div class="">
-                <button type="button" class="btn" id="search">Buscar</button>
+                <input type="text" class="form-input" placeholder="Ciudad" name="ciudad" id="ciudad">
+                <div class="">
+                    <button type="button" class="btn" id="search">Buscar</button>
+                </div>
+                <div id="error" class="hide" role="alert">
+                </div>
             </div>
-            <div id="error" class="hide" role="alert">
-            </div>
+            <div id="w-info" class="hide">
+                <div>
+                    <h2 class="city"></h2>
+                </div>
+                <div>
+                    <h1 class="temp"></h1>
+                </div>
+                <div>
+                    <h3 class="description"></h3>
+                </div>
+                <div class="icon"></div>
+        </section>
+        <h1 class="titulo"></h1>
         </div>
 
-        <div id="w-info" class="hide">
-            <div>
-                <h2 class="city"></h2>
-            </div>
-            <div>
-                <h1 class="temp"></h1>
-            </div>
-            <div>
-                <h3 class="description"></h3>
-            </div>
-            <div class="icon"></div>
-            </section>
-
-            <h1 class="titulo"></h1>
-        </div>
-        <div class="container__titulo">
-            <h1 class="titulo"></h1>
-        </div>
-        <div class="container__hora">
-            <h2 class="hora"></h2>
-        </div>
     </main>
     <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/18bc81c54f.js" crossorigin="anonymous"></script>
 </body>
+
+
 
 </html>

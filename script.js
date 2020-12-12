@@ -1,4 +1,5 @@
 /** @format */
+
 let button = document.querySelector(".btn");
 let inputValue = document.querySelector(".form-input");
 let city = document.querySelector(".city");
@@ -19,32 +20,6 @@ const obtenerUbicacionActual = function () {
         );
     });
 };
-//buscador de ciudad
-button.addEventListener("click"," function () {
-    document.getElementById("error").style = "display:none";
-
-    fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=${apiKey}`
-    )
-        .then((response) => response.json())
-        .then((data) => {
-            document.getElementById("w-info").style = "display:flex";
-            let cityValue = data.name;
-            let tempValue = data.main.temp;
-            let descriptionValue = data.weather[0].description;
-            let iconValue = data.weather[0].icon;
-            city.innerHTML = cityValue;
-            temp.innerHTML = tempValue;
-            description.innerHTML = descriptionValue;
-            icon.innerHTML = `<img src="http://openweathermap.org/img/wn/${iconValue}.png"></img>`;
-            console.log(cityValue, tempValue, descriptionValue);
-        })
-        .catch((err) => {
-            document.getElementById("error").innerHTML = "Ciudad no encontrada";
-            document.getElementById("error").style = "display:block";
-            document.getElementById("w-info").style = "display:none";
-        });
-});
 
 //Temperatura en celsius
 const kelvinACelsius = function (k) {
@@ -104,5 +79,40 @@ const opciones = {
 //idioma
 
 const idiomaLocal = navigator.language;
-
 fecha.textContent = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora);
+
+//Efecto de Animacion Hamburguesa
+
+function cambiarClase() {
+    let topnav = document.getElementById("site-nav");
+    topnav.classList.toggle("site-nav-open");
+    let menuOpen = document.getElementById("menu-toggle");
+    menuOpen.classList.toggle("menu-open");
+}
+
+//buscador de ciudad
+button.addEventListener("click", function () {
+    document.getElementById("error").style = "display:none";
+
+    fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=${apiKey}`
+    )
+        .then((response) => response.json())
+        .then((data) => {
+            document.getElementById("w-info").style = "display:flex";
+            let cityValue = data.name;
+            let tempValue = data.main.temp;
+            let descriptionValue = data.weather[0].description;
+            let iconValue = data.weather[0].icon;
+            city.innerHTML = cityValue;
+            temp.innerHTML = tempValue;
+            description.innerHTML = descriptionValue;
+            icon.innerHTML = `<img src="http://openweathermap.org/img/wn/${iconValue}.png"></img>`;
+            console.log(cityValue, tempValue, descriptionValue);
+        })
+        .catch((err) => {
+            document.getElementById("error").innerHTML = "Ciudad no encontrada";
+            document.getElementById("error").style = "display:block";
+            document.getElementById("w-info").style = "display:none";
+        });
+});
