@@ -1,5 +1,6 @@
 const ciudad = document.querySelector('.titulo');
 const containerTitulo = document.querySelector('.container__titulo');
+const fecha = document.querySelector('.hora');
 
 //Ubicación actual con geolocation y luego con geocode
 const obtenerUbicacionActual = function () {
@@ -55,3 +56,31 @@ const ciudadDondeEstoy = async function () {
   }
 };
 ciudadDondeEstoy();
+
+//fecha hora y dia
+const ahora = new Date();
+const opciones = {
+  day: 'numeric',
+  month: 'short',
+  hour: 'numeric',
+  year: 'numeric',
+  minute: 'numeric',
+};
+
+//idioma
+
+const idiomaLocal = navigator.language;
+
+fecha.textContent = new Intl.DateTimeFormat(idiomaLocal, opciones).format(
+  ahora
+);
+
+//Efecto de Animacion Hamburguesa
+
+function cambiarClase(){
+    let topnav = document.getElementById('site-nav');
+        topnav.classList.toggle('site-nav-open');
+    let menuOpen = document.getElementById('menu-toggle');
+        menuOpen.classList.toggle('menu-open');    
+        
+}
