@@ -199,3 +199,13 @@ const ciudadDondeEstoy = async function () {
   }
 };
 ciudadDondeEstoy();
+
+//Efecto de Animacion Hamburguesa
+
+function cambiarClase(){
+    let topnav = document.getElementById('site-nav');
+        topnav.classList.toggle('site-nav-open');
+    let menuOpen = document.getElementById('menu-toggle');
+        menuOpen.classList.toggle('menu-open');    
+        
+}
