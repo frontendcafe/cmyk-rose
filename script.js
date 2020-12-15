@@ -34,6 +34,24 @@ const capitalizarPalabra = function (palabra) {
   return capPalabra;
 };
 
+//fecha hora y dia
+const ahora = new Date();
+const opciones = {
+  day: 'numeric',
+  month: 'short',
+  hour: 'numeric',
+  year: 'numeric',
+  minute: 'numeric',
+};
+
+//idioma
+
+const idiomaLocal = navigator.language;
+
+fecha.textContent = new Intl.DateTimeFormat(idiomaLocal, opciones).format(
+  ahora
+);
+
 //Mostrar error
 const mostrarError = function (msj) {
   containerResultadosCiudad.textContent = `${msj}`;
@@ -112,6 +130,12 @@ const mostrarPronostico = function (data) {
   </div>
   `;
   containerPronosticos.insertAdjacentHTML('beforeend', html);
+
+  const dataHoy = document.querySelector(
+    '.container-resultados__pronosticosemanal--pronosticos-dia'
+  );
+
+  if (dataHoy.innerHTML === 'Hoy') return dataHoy.classList.add('hoy');
 };
 
 //obtener dia de la semana
@@ -140,7 +164,7 @@ const pronostico5 = async function (lat, lon) {
     if (!resPronostico.ok)
       throw new Error('Error en la busqueda del pronostico');
     const dataPronostico = await resPronostico.json();
-    dataPronostico.daily.forEach((dia) => mostrarPronostico(dia));
+    dataPronostico.daily.forEach((dataDia) => mostrarPronostico(dataDia));
   } catch (err) {
     mostrarError(`${err.message}`);
   }
@@ -175,21 +199,3 @@ const ciudadDondeEstoy = async function () {
   }
 };
 ciudadDondeEstoy();
-
-//fecha hora y dia
-const ahora = new Date();
-const opciones = {
-  day: 'numeric',
-  month: 'short',
-  hour: 'numeric',
-  year: 'numeric',
-  minute: 'numeric',
-};
-
-//idioma
-
-const idiomaLocal = navigator.language;
-
-fecha.textContent = new Intl.DateTimeFormat(idiomaLocal, opciones).format(
-  ahora
-);
