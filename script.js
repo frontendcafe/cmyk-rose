@@ -1,6 +1,5 @@
 'use strict';
 
-// const ciudad = document.querySelector('.titulo');
 const containerTitulo = document.querySelector('.container__titulo');
 const fecha = document.querySelector('.fechayhora');
 const containerResultadosCiudad = document.querySelector(
@@ -179,7 +178,6 @@ const clima = async function (lat, lon) {
 
     if (!resClima.ok) throw new Error('Error en la busqueda del clima');
     const dataClima = await resClima.json();
-    // console.log(dataClima);
     insertarDOM(dataClima);
   } catch (err) {
     mostrarError(`${err.message}`);
@@ -191,7 +189,6 @@ const ciudadDondeEstoy = async function () {
   try {
     const pos = await obtenerUbicacionActual();
     const { latitude: lat, longitude: lon } = pos.coords;
-    // console.log(lat, lon);
     clima(lat, lon);
     pronostico5(lat, lon);
   } catch (err) {
@@ -202,10 +199,9 @@ ciudadDondeEstoy();
 
 //Efecto de Animacion Hamburguesa
 
-function cambiarClase(){
-    let topnav = document.getElementById('site-nav');
-        topnav.classList.toggle('site-nav-open');
-    let menuOpen = document.getElementById('menu-toggle');
-        menuOpen.classList.toggle('menu-open');    
-        
+function cambiarClase() {
+  let topnav = document.getElementById('site-nav');
+  topnav.classList.toggle('site-nav-open');
+  let menuOpen = document.getElementById('menu-toggle');
+  menuOpen.classList.toggle('menu-open');
 }
