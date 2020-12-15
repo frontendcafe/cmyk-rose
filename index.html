@@ -7,34 +7,47 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="styles.css">
   <script defer src="script.js"></script>
-
   <script src="https://kit.fontawesome.com/18bc81c54f.js" crossorigin="anonymous"></script>
   <title>Clima App</title>
 </head>
 
 <body>
-  <header>
+    <header>
     <div class="container">
         <img class="rose" src="Icon/icons8-rose-30.png" height="20px"><strong><span class="logo">ROSE WEATHER</span></strong>
     </div>
-  <nav id="site-nav" class="site-nav">
-    <ul>
-        <li><strong><a href="#"><i class="fa fa-home site-nav--icon"></i>INICIO</a></strong></li>
-        <li><strong><a href="#"><i class="fa fa-smog site-nav--icon"></i>CLIMA</a></strong></li>
-        <li><strong><a href="#"><i class="fas fa-info-circle site-nav--icon"></i>PROYECTO</a></strong></li>
-        <li><strong><a href="#"><i class="fa fa-envelope site-nav--icon"></i>CONTACTO</a></strong></li>
-    </ul>
-</nav>
-<div id="menu-toggle" class="menu-toggle" onClick="cambiarClase()">
-    <div class="hamburger"></div>
-</div>
+    <nav id="site-nav" class="site-nav">
+      <ul>
+          <li><strong><a href="#"><i class="fa fa-home site-nav--icon"></i>INICIO</a></strong></li>
+          <li><strong><a href="#"><i class="fa fa-smog site-nav--icon"></i>CLIMA</a></strong></li>
+          <li><strong><a href="#"><i class="fas fa-info-circle site-nav--icon"></i>PROYECTO</a></strong></li>
+          <li><strong><a href="#"><i class="fa fa-envelope site-nav--icon"></i>CONTACTO</a></strong></li>
+      </ul>
+    </nav>
+    <div id="menu-toggle" class="menu-toggle" onClick="cambiarClase()">
+        <div class="hamburger"></div>
+    </div>
   </header>
-  <div class="container__titulo">
-    <h1 class="titulo"></h1>
-  </div>
-  <div class="container__hora">
-    <h2 class="hora"></h2>
-  </div>
+  <!-- container principal -->
+  <main class="container">
+    <section class="container-buscador__clima">
+      BUSCADOR CLIMA
+    </section>
+    <section class="container-resultados">
+      <div class="container-resultados__pronostico">
+        <h3 class="container-resultados__pronostico--titulo">Pronóstico</h3>
+        <p class="container-resultados__pronostico--fechayhora fechayhora"></p>
+      </div>
+      <div class="container-resultados__datosciudad"></div>
+      <div class="container-resultados__pronosticosemanal">
+        <div class="container-resultados__pronosticosemanal--container">
+          <h3 class="container-resultados__pronosticosemanal--titulo">Pronóstico semanal</h3>
+          <div class="container-resultados__pronosticosemanal--container-pronosticos">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 
 </html>
