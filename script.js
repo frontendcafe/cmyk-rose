@@ -1,10 +1,13 @@
 'use strict';
 
-const ciudad = document.querySelector('.titulo');
+// const ciudad = document.querySelector('.titulo');
 const containerTitulo = document.querySelector('.container__titulo');
 const fecha = document.querySelector('.fechayhora');
 const containerResultadosCiudad = document.querySelector(
   '.container-resultados__datosciudad'
+);
+const containerPronosticos = document.querySelector(
+  '.container-resultados__pronosticosemanal--container-pronosticos'
 );
 
 //Ubicación actual con geolocation y luego con geocode
@@ -31,7 +34,10 @@ const capitalizarPalabra = function (palabra) {
   return capPalabra;
 };
 
-const celsiusAFahrenheitBtnFn = function () {};
+//Mostrar error
+const mostrarError = function (msj) {
+  containerResultadosCiudad.textContent = `${msj}`;
+};
 
 //insertar al DOM la ciudad y la temperatura
 const insertarDOM = function (data) {
@@ -69,24 +75,72 @@ const insertarDOM = function (data) {
   );
 
   celsiusAFahrenheitBtn.addEventListener('click', function () {
-    let fahrenheitTemp = celciusAFahrenheit(kelvinACelsius(data.main.temp));
+    let fahrenheitTemp = `${celciusAFahrenheit(
+      kelvinACelsius(data.main.temp)
+    )} F`;
 
     if (temperaturaCelsius.innerHTML !== fahrenheitTemp) {
-      temperaturaCelsius.textContent = `${fahrenheitTemp} F`;
+      temperaturaCelsius.textContent = fahrenheitTemp;
       celsiusAFahrenheitBtn.textContent = `Ver en Celsius`;
-    } else if (temperaturaCelsius.innerHTML !== fahrenheitTemp) temperaturaCelsius.textContent = `${fahrenheitTemp} C`;
+    } else if (temperaturaCelsius.innerHTML === fahrenheitTemp) {
+      temperaturaCelsius.textContent = `${kelvinACelsius(data.main.temp)}ºC`;
+      celsiusAFahrenheitBtn.textContent = `Ver en Fahrenheit`;
+    }
   });
+};
+
+//Mostrar pronostico
+const mostrarPronostico = function (data) {
+  const html = `
+  <div class="container-resultados__pronosticosemanal--pronosticos">
+    <p class="container-resultados__pronosticosemanal--pronosticos-dia">${capitalizarPalabra(
+      obtenerDia(data.dt)
+    )}</p>
+    <h2 class="container-resultados__pronosticosemanal--pronosticos-tempmax">${kelvinACelsius(
+      data.temp.max
+    )}ºC</h2>
+    <h5 class="container-resultados__pronosticosemanal--pronosticos-tempmin">${kelvinACelsius(
+      data.temp.min
+    )}ºC</h5>
+    <img class="container-resultados__pronosticosemanal--pronosticos-icono" src="http://openweathermap.org/img/wn/${
+      data.weather[0].icon
+    }@2x.png">
+    <h5 class="container-resultados__pronosticosemanal--pronosticos-preci">Humedad:</h5>
+    <h5 class="container-resultados__pronosticosemanal--pronosticos-preci">${
+      data.humidity
+    } %</h5>
+  </div>
+  `;
+  containerPronosticos.insertAdjacentHTML('beforeend', html);
+};
+
+//obtener dia de la semana
+const obtenerDia = function (dia) {
+  const ahora = dia * 1000;
+  const calcDaysPassed = (date1, date2) =>
+    Math.round(Math.abs((date2 - date1) / (1000 * 60 * 60 * 24)));
+  const daysPassed = calcDaysPassed(new Date(), ahora);
+
+  if (daysPassed === 0) {
+    return 'Hoy';
+  }
+  const opciones = {
+    weekday: 'long',
+    day: 'numeric',
+  };
+  return new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora);
 };
 
 //pronostico
 const pronostico5 = async function (lat, lon) {
   try {
     const resPronostico = await fetch(
-      `http://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=5&appid=ad226a44dedb3b77340424c5a27e237d`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=ad226a44dedb3b77340424c5a27e237d`
     );
-    if (!resClima.ok) throw new Error('Error en la busqueda del pronostico');
+    if (!resPronostico.ok)
+      throw new Error('Error en la busqueda del pronostico');
     const dataPronostico = await resPronostico.json();
-    console.log(dataPronostico);
+    dataPronostico.daily.forEach((dia) => mostrarPronostico(dia));
   } catch (err) {
     mostrarError(`${err.message}`);
   }
@@ -101,16 +155,11 @@ const clima = async function (lat, lon) {
 
     if (!resClima.ok) throw new Error('Error en la busqueda del clima');
     const dataClima = await resClima.json();
-    console.log(dataClima);
+    // console.log(dataClima);
     insertarDOM(dataClima);
   } catch (err) {
     mostrarError(`${err.message}`);
   }
-};
-
-//Mostrar error
-const mostrarError = function (msj) {
-  ciudad.textContent = `${msj}`;
 };
 
 //consulta ciudad
