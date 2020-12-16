@@ -170,7 +170,7 @@ const pronostico5 = async function (lat, lon) {
     if (!resPronostico.ok)
       throw new Error('Error en la busqueda del pronostico');
     const dataPronostico = await resPronostico.json();
-    const data5 = dataPronostico.daily.slice(3);
+    const data5 = dataPronostico.daily.splice(0, 5);
     data5.forEach((dataDia) => mostrarPronostico(dataDia));
   } catch (err) {
     mostrarError(`${err.message}`);
