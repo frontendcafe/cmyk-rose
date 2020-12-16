@@ -232,7 +232,7 @@ const fondoImg = function (msg) {
   const hora = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora);
   console.log(hora);
 
-  if (msg.includes('rotas') && hora > '06:00' && hora <= '18:00') {
+  if (msg.includes('rotas') && hora >= '06:00' && hora <= '18:00') {
     setFondoContainer("url('assets/bkg_images/mist.png')");
     contenedoresDia();
   }
@@ -240,22 +240,27 @@ const fondoImg = function (msg) {
     return setFondoContainer("url('assets/bkg_images/mist.png')");
 
   if (
-    (msg.includes('niebla') || msg.includes('nieblina')) &&
-    hora > '06:00' &&
+    (msg.includes('niebla') ||
+      msg.includes('nieblina') ||
+      msg.includes('nuboso')) &&
+    hora >= '06:00' &&
     hora <= '18:00'
   ) {
     setFondoContainer("url('assets/bkg_images/mist.png')");
     contenedoresDia();
   }
   if (
-    (msg.includes('niebla') || msg.includes('nieblina')) &&
+    (msg.includes('niebla') ||
+      msg.includes('nieblina') ||
+      msg.includes('nuboso')) &&
     (hora > '18:00' || hora < '06:00')
-  )
-    return setFondoContainer("url('assets/bkg_images/mist.png')");
+  ) {
+    setFondoContainer("url('assets/bkg_images/mist.png')");
+  }
 
   if (
     (msg.includes('dispersas') || msg.includes('nubes')) &&
-    hora > '06:00' &&
+    hora >= '06:00' &&
     hora <= '18:00'
   ) {
     setFondoContainer("url('assets/bkg_images/scatteredClouds.png')");
@@ -270,14 +275,14 @@ const fondoImg = function (msg) {
     console.log('hola');
   }
 
-  if (msg.includes('pocas') && hora > '06:00' && hora <= '18:00') {
+  if (msg.includes('pocas') && hora >= '06:00' && hora <= '18:00') {
     setFondoContainer("url('assets/bkg_images/fewClouds.png')");
     contenedoresDia();
   }
   if (msg.includes('pocas') && (hora > '18:00' || hora < '06:00'))
     return setFondoContainer("url('assets/bkg_images/fewClouds.png')");
 
-  if (msg.includes('nieve') && hora > '06:00' && hora <= '18:00') {
+  if (msg.includes('nieve') && hora >= '06:00' && hora <= '18:00') {
     setFondoContainer("url('assets/bkg_images/snow.png')");
     contenedoresDia();
   }
@@ -286,7 +291,7 @@ const fondoImg = function (msg) {
 
   if (
     (msg.includes('despejado') || msg.includes('claro')) &&
-    hora > '06:00' &&
+    hhora >= '06:00' &&
     hora <= '18:00'
   ) {
     setFondoContainer("url('assets/bkg_images/clearSky_dia.png')");
@@ -298,7 +303,7 @@ const fondoImg = function (msg) {
   )
     return setFondoContainer("url('assets/bkg_images/clearSky_noche.png')");
 
-  if (msg.includes('lluvia') && hora > '06:00' && hora <= '18:00') {
+  if (msg.includes('lluvia') && hora >= '06:00' && hora <= '18:00') {
     setFondoContainer("url('assets/bkg_images/rain.png')");
     contenedoresDia();
   }
@@ -307,7 +312,7 @@ const fondoImg = function (msg) {
 
   if (
     msg.includes('aguacero') ||
-    (msg.includes('fuerte') && hora > '06:00' && hora <= '18:00')
+    (msg.includes('fuerte') && hora >= '06:00' && hora <= '18:00')
   ) {
     setFondoContainer("url('assets/bkg_images/showerRain.png')");
     contenedoresDia();
@@ -319,7 +324,7 @@ const fondoImg = function (msg) {
     setFondoContainer("url('assets/bkg_images/showerRain.png')");
   }
 
-  if (msg.includes('tormenta') && hora > '06:00' && hora <= '18:00') {
+  if (msg.includes('tormenta') && hora >= '06:00' && hora <= '18:00') {
     setFondoContainer("url('assets/bkg_images/main.png')");
     contenedoresDia();
   }
