@@ -1,9 +1,16 @@
 'use strict';
-
+const containerApp = document.querySelector('.container');
 const containerTitulo = document.querySelector('.container__titulo');
 const fecha = document.querySelector('.fechayhora');
 const containerResultadosCiudad = document.querySelector(
   '.container-resultados__datosciudad'
+);
+const containerPronosticoFYH = document.querySelector(
+  '.container-resultados__pronostico'
+);
+
+const containerPronosticoSemanal = document.querySelector(
+  '.container-resultados__pronosticosemanal'
 );
 const containerPronosticos = document.querySelector(
   '.container-resultados__pronosticosemanal--container-pronosticos'
@@ -179,6 +186,7 @@ const clima = async function (lat, lon) {
     if (!resClima.ok) throw new Error('Error en la busqueda del clima');
     const dataClima = await resClima.json();
     insertarDOM(dataClima);
+    fondoImg(dataClima.weather[0].description);
   } catch (err) {
     mostrarError(`${err.message}`);
   }
@@ -196,6 +204,129 @@ const ciudadDondeEstoy = async function () {
   }
 };
 ciudadDondeEstoy();
+
+//function backgroud
+const setFondoContainer = function (posImg) {
+  containerApp.style.backgroundImage = posImg;
+  containerApp.style.backgroundRepeat = 'no-repeat';
+  containerApp.style.backgroundSize = 'auto 100%';
+};
+
+const contenedoresDia = function () {
+  containerApp.style.backgroundColor = '#9fbfff';
+  containerResultadosCiudad.style.backgroundColor = '#8db3ff';
+  containerPronosticoFYH.style.backgroundColor = '#8db3ff';
+  containerPronosticoSemanal.style.backgroundColor = '#8db3ff';
+};
+
+//Imagen background
+const fondoImg = function (msg) {
+  const ahora = new Date();
+  const opciones = {
+    hour: 'numeric',
+    minute: 'numeric',
+  };
+
+  //idioma
+  const idiomaLocal = navigator.language;
+  const hora = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora);
+  console.log(hora);
+
+  if (msg.includes('rotas') && hora > '06:00' && hora <= '18:00') {
+    setFondoContainer("url('assets/bkg_images/mist.png')");
+    contenedoresDia();
+  }
+  if (msg.includes('rotas') && (hora > '18:00' || hora < '06:00'))
+    return setFondoContainer("url('assets/bkg_images/mist.png')");
+
+  if (
+    (msg.includes('niebla') || msg.includes('nieblina')) &&
+    hora > '06:00' &&
+    hora <= '18:00'
+  ) {
+    setFondoContainer("url('assets/bkg_images/mist.png')");
+    contenedoresDia();
+  }
+  if (
+    (msg.includes('niebla') || msg.includes('nieblina')) &&
+    (hora > '18:00' || hora < '06:00')
+  )
+    return setFondoContainer("url('assets/bkg_images/mist.png')");
+
+  if (
+    (msg.includes('dispersas') || msg.includes('nubes')) &&
+    hora > '06:00' &&
+    hora <= '18:00'
+  ) {
+    setFondoContainer("url('assets/bkg_images/scatteredClouds.png')");
+    contenedoresDia();
+  }
+
+  if (
+    (msg.includes('dispersas') || msg.includes('nubes')) &&
+    (hora > '18:00' || hora < '06:00')
+  ) {
+    setFondoContainer("url('assets/bkg_images/scatteredClouds.png')");
+    console.log('hola');
+  }
+
+  if (msg.includes('pocas') && hora > '06:00' && hora <= '18:00') {
+    setFondoContainer("url('assets/bkg_images/fewClouds.png')");
+    contenedoresDia();
+  }
+  if (msg.includes('pocas') && (hora > '18:00' || hora < '06:00'))
+    return setFondoContainer("url('assets/bkg_images/fewClouds.png')");
+
+  if (msg.includes('nieve') && hora > '06:00' && hora <= '18:00') {
+    setFondoContainer("url('assets/bkg_images/snow.png')");
+    contenedoresDia();
+  }
+  if (msg.includes('nieve') && (hora > '18:00' || hora < '06:00'))
+    return setFondoContainer("url('assets/bkg_images/snow.png')");
+
+  if (
+    (msg.includes('despejado') || msg.includes('claro')) &&
+    hora > '06:00' &&
+    hora <= '18:00'
+  ) {
+    setFondoContainer("url('assets/bkg_images/clearSky_dia.png')");
+    contenedoresDia();
+  }
+  if (
+    (msg.includes('despejado') || msg.includes('claro')) &&
+    (hora > '18:00' || hora < '06:00')
+  )
+    return setFondoContainer("url('assets/bkg_images/clearSky_noche.png')");
+
+  if (msg.includes('lluvia') && hora > '06:00' && hora <= '18:00') {
+    setFondoContainer("url('assets/bkg_images/rain.png')");
+    contenedoresDia();
+  }
+  if (msg.includes('lluvia') && (hora > '18:00' || hora < '06:00'))
+    return setFondoContainer("url('assets/bkg_images/rain.png')");
+
+  if (
+    msg.includes('aguacero') ||
+    (msg.includes('fuerte') && hora > '06:00' && hora <= '18:00')
+  ) {
+    setFondoContainer("url('assets/bkg_images/showerRain.png')");
+    contenedoresDia();
+  }
+  if (
+    msg.includes('aguacero') ||
+    (msg.includes('fuerte') && (hora > '18:00' || hora < '06:00'))
+  ) {
+    setFondoContainer("url('assets/bkg_images/showerRain.png')");
+  }
+
+  if (msg.includes('tormenta') && hora > '06:00' && hora <= '18:00') {
+    setFondoContainer("url('assets/bkg_images/main.png')");
+    contenedoresDia();
+  }
+  if (msg.includes('tormenta') && (hora > '18:00' || hora < '06:00')) {
+    setFondoContainer("url('assets/bkg_images/main.png')");
+  }
+};
 
 //Efecto de Animacion Hamburguesa
 
