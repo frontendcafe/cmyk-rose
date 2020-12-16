@@ -187,6 +187,7 @@ const clima = async function (lat, lon) {
     const dataClima = await resClima.json();
     insertarDOM(dataClima);
     fondoImg(dataClima.weather[0].description);
+    console.log(dataClima);
   } catch (err) {
     mostrarError(`${err.message}`);
   }
@@ -232,105 +233,46 @@ const fondoImg = function (msg) {
   const hora = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora);
   console.log(hora);
 
-  if (msg.includes('rotas') && hora >= '06:00' && hora <= '18:00') {
-    setFondoContainer("url('assets/bkg_images/mist.png')");
-    contenedoresDia();
-  }
-  if (msg.includes('rotas') && (hora > '18:00' || hora < '06:00'))
-    return setFondoContainer("url('assets/bkg_images/mist.png')");
+  //refactorizando codigo ifs
 
-  if (
-    (msg.includes('niebla') ||
-      msg.includes('nieblina') ||
-      msg.includes('nuboso')) &&
-    hora >= '06:00' &&
-    hora <= '18:00'
-  ) {
-    setFondoContainer("url('assets/bkg_images/mist.png')");
-    contenedoresDia();
-  }
-  if (
-    (msg.includes('niebla') ||
-      msg.includes('nieblina') ||
-      msg.includes('nuboso')) &&
-    (hora > '18:00' || hora < '06:00')
-  ) {
-    setFondoContainer("url('assets/bkg_images/mist.png')");
-  }
+  const imagPalabra = [
+    { descripcion: ['rotas'], url: "url('assets/bkg_images/mist.png')" },
+    {
+      descripcion: ['niebla', 'nieblina', 'nuboso'],
+      url: "url('assets/bkg_images/mist.png')",
+    },
+    {
+      descripcion: ['dispersas', 'nubes'],
+      url: "url('assets/bkg_images/scatteredClouds.png')",
+    },
+    { descripcion: ['pocas'], url: "url('assets/bkg_images/fewClouds.png')" },
+    { descripcion: ['nieve'], url: "url('assets/bkg_images/snow.png')" },
+    {
+      descripcion: ['despejado', 'claro'],
+      url: "url('assets/bkg_images/clearSky_dia.png')",
+    },
+    {
+      descripcion: ['despejado', 'claro'],
+      url: "url('assets/bkg_images/clearSky_noche.png')",
+    },
+    { descripcion: ['lluvia'], url: "url('assets/bkg_images/rain.png')" },
+    {
+      descripcion: ['aguacero'],
+      url: "url('assets/bkg_images/showerRain.png')",
+    },
+    { descripcion: ['tormenta'], url: "url('assets/bkg_images/main.png')" },
+  ];
 
-  if (
-    (msg.includes('dispersas') || msg.includes('nubes')) &&
-    hora >= '06:00' &&
-    hora <= '18:00'
-  ) {
-    setFondoContainer("url('assets/bkg_images/scatteredClouds.png')");
-    contenedoresDia();
-  }
-
-  if (
-    (msg.includes('dispersas') || msg.includes('nubes')) &&
-    (hora > '18:00' || hora < '06:00')
-  ) {
-    setFondoContainer("url('assets/bkg_images/scatteredClouds.png')");
-    console.log('hola');
-  }
-
-  if (msg.includes('pocas') && hora >= '06:00' && hora <= '18:00') {
-    setFondoContainer("url('assets/bkg_images/fewClouds.png')");
-    contenedoresDia();
-  }
-  if (msg.includes('pocas') && (hora > '18:00' || hora < '06:00'))
-    return setFondoContainer("url('assets/bkg_images/fewClouds.png')");
-
-  if (msg.includes('nieve') && hora >= '06:00' && hora <= '18:00') {
-    setFondoContainer("url('assets/bkg_images/snow.png')");
-    contenedoresDia();
-  }
-  if (msg.includes('nieve') && (hora > '18:00' || hora < '06:00'))
-    return setFondoContainer("url('assets/bkg_images/snow.png')");
-
-  if (
-    (msg.includes('despejado') || msg.includes('claro')) &&
-    hhora >= '06:00' &&
-    hora <= '18:00'
-  ) {
-    setFondoContainer("url('assets/bkg_images/clearSky_dia.png')");
-    contenedoresDia();
-  }
-  if (
-    (msg.includes('despejado') || msg.includes('claro')) &&
-    (hora > '18:00' || hora < '06:00')
-  )
-    return setFondoContainer("url('assets/bkg_images/clearSky_noche.png')");
-
-  if (msg.includes('lluvia') && hora >= '06:00' && hora <= '18:00') {
-    setFondoContainer("url('assets/bkg_images/rain.png')");
-    contenedoresDia();
-  }
-  if (msg.includes('lluvia') && (hora > '18:00' || hora < '06:00'))
-    return setFondoContainer("url('assets/bkg_images/rain.png')");
-
-  if (
-    msg.includes('aguacero') ||
-    (msg.includes('fuerte') && hora >= '06:00' && hora <= '18:00')
-  ) {
-    setFondoContainer("url('assets/bkg_images/showerRain.png')");
-    contenedoresDia();
-  }
-  if (
-    msg.includes('aguacero') ||
-    (msg.includes('fuerte') && (hora > '18:00' || hora < '06:00'))
-  ) {
-    setFondoContainer("url('assets/bkg_images/showerRain.png')");
-  }
-
-  if (msg.includes('tormenta') && hora >= '06:00' && hora <= '18:00') {
-    setFondoContainer("url('assets/bkg_images/main.png')");
-    contenedoresDia();
-  }
-  if (msg.includes('tormenta') && (hora > '18:00' || hora < '06:00')) {
-    setFondoContainer("url('assets/bkg_images/main.png')");
-  }
+  imagPalabra.forEach((el) => {
+    el['descripcion'].forEach((clima) => {
+      if (msg.includes(clima) && hora >= '06:00' && hora <= '18:00') {
+        setFondoContainer(el['url']);
+        contenedoresDia();
+      } else if (msg.includes(clima) && (hora > '18:00' || hora < '06:00')) {
+        setFondoContainer(el['url']);
+      }
+    });
+  });
 };
 
 //Efecto de Animacion Hamburguesa
