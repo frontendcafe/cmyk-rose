@@ -170,7 +170,8 @@ const pronostico5 = async function (lat, lon) {
     if (!resPronostico.ok)
       throw new Error('Error en la busqueda del pronostico');
     const dataPronostico = await resPronostico.json();
-    dataPronostico.daily.forEach((dataDia) => mostrarPronostico(dataDia));
+    const data5 = dataPronostico.daily.slice(3);
+    data5.forEach((dataDia) => mostrarPronostico(dataDia));
   } catch (err) {
     mostrarError(`${err.message}`);
   }
@@ -187,7 +188,6 @@ const clima = async function (lat, lon) {
     const dataClima = await resClima.json();
     insertarDOM(dataClima);
     fondoImg(dataClima.weather[0].description);
-    console.log(dataClima);
   } catch (err) {
     mostrarError(`${err.message}`);
   }
@@ -231,7 +231,6 @@ const fondoImg = function (msg) {
   //idioma
   const idiomaLocal = navigator.language;
   const hora = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora);
-  console.log(hora);
 
   //refactorizando codigo ifs
 
