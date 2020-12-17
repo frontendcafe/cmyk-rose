@@ -210,7 +210,6 @@ const ciudadDondeEstoy = async function () {
     try {
         const pos = await obtenerUbicacionActual();
         const { latitude: lat, longitude: lon } = pos.coords;
-        console.log(pos);
         clima(lat, lon);
         pronostico5(lat, lon);
     } catch (err) {
@@ -243,7 +242,6 @@ const fondoImg = function (msg) {
     //idioma
     const idiomaLocal = navigator.language;
     const hora = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora);
-    console.log(hora);
 
     if (msg.includes("rotas") && hora > "06:00" && hora <= "18:00") {
         setFondoContainer("url('assets/bkg_images/mist.png')");
@@ -280,7 +278,6 @@ const fondoImg = function (msg) {
         (hora > "18:00" || hora < "06:00")
     ) {
         setFondoContainer("url('assets/bkg_images/scatteredClouds.png')");
-        console.log("hola");
     }
 
     if (msg.includes("pocas") && hora > "06:00" && hora <= "18:00") {
@@ -360,8 +357,6 @@ button.addEventListener("click", function () {
                 `https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&lang=es&appid=${apiKey}`
             );
             const response = await resBusquedaCiudad.json();
-
-            console.log(response);
             insertarDOM(response);
             pronostico5(response.coord.lat, response.coord.lon);
         } catch (err) {
