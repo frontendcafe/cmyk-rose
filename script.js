@@ -231,13 +231,14 @@ const fondoImg = function (msg) {
   //idioma
   const idiomaLocal = navigator.language;
   const hora = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora);
+  console.log(hora);
 
   //refactorizando codigo ifs
 
   const imagPalabra = [
     { descripcion: ['rotas'], url: "url('assets/bkg_images/mist.png')" },
     {
-      descripcion: ['niebla', 'nieblina', 'nuboso'],
+      descripcion: ['niebla', 'nieblina', 'nuboso', 'bruma'],
       url: "url('assets/bkg_images/mist.png')",
     },
     {
@@ -264,10 +265,10 @@ const fondoImg = function (msg) {
 
   imagPalabra.forEach((el) => {
     el['descripcion'].forEach((clima) => {
-      if (msg.includes(clima) && hora >= '06:00' && hora <= '18:00') {
-        setFondoContainer(el['url']);
+      if (msg.includes(clima) && (hora >= '06:00' || hora <= '18:00')) {
         contenedoresDia();
-      } else if (msg.includes(clima) && (hora > '18:00' || hora < '06:00')) {
+        setFondoContainer(el['url']);
+      } else if (msg.includes(clima) && (hora < '06:00' || hora > '18:00')) {
         setFondoContainer(el['url']);
       }
     });
