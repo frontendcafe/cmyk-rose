@@ -1,8 +1,4 @@
-/**
- * reset
- *
- * @format
- */
+/** @format */
 
 *,
 *::before,
@@ -26,30 +22,85 @@ html {
 }
 
 body {
+    background-color: var(--main-bg-color);
     font-family: "Montserrat", sans-serif;
     font-size: 14px;
-    background-color: var(--main-bg-color);
 }
 
 .container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 3;
-    padding: 15px;
+    display: flex;
+    justify-content: center;
     padding-top: 60px;
     min-height: 100vh;
-    border: 2px solid red;
+    width: 100%;
 }
 
 .container-fondo {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 3;
-    min-height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    column-gap: 10px;
+    row-gap: 1em;
+    width: 100%;
+    min-height: 90vh;
+    background: left top no-repeat;
 }
 
 .container-resultados {
+    display: flex;
+    flex-flow: column;
+    padding: 15px;
+    justify-content: space-around;
     background-color: transparent;
+    width: 50%;
+}
+
+.container-buscador__clima {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 250px;
+    width: 50%;
+}
+
+.custom-search {
+    display: flex;
+    width: 60%;
+    position: absolute;
+    top: 300px;
+    left: 80px;
+}
+input[type="search"] {
+    width: 50%;
+    height: 45px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    outline: none;
+    border: none;
+    padding-left: 30px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+}
+
+.btn {
+    cursor: pointer;
+    margin-left: -21.5%;
+    height: 45px;
+    width: 120px;
+    background: var(--resultados-color);
+    border: none;
+    outline: inherit;
+    color: var(--main-bg-color);
+    padding: 14px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.no-encontrada {
+    color: white;
 }
 
 .container-resultados__pronostico {
@@ -57,7 +108,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 20px 10px;
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: #2c51d3;
     border-radius: 6px;
     margin: 10px 0px;
 }
@@ -71,6 +122,7 @@ body {
     color: var(--resultados-color);
     font-weight: 700;
     text-transform: uppercase;
+    font-size: 1.17em;
 }
 
 .container-resultados__datosciudad {
@@ -78,7 +130,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     padding: 20px 10px;
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: #2c51d3;
     border-radius: 6px;
     margin: 30px 0px;
 }
@@ -106,6 +158,9 @@ body {
     border: none;
     margin-top: 20px;
     font-size: 1.1rem;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .container-resultados__datosciudad--descripcionbtn:active {
@@ -121,6 +176,8 @@ body {
 .container-resultados__datosciudad--descripcionclima {
     color: var(--text-white-color);
     font-size: 18px;
+    display: flex;
+    justify-content: center;
 }
 
 .container-resultados__datosciudad--temperatura {
@@ -130,10 +187,10 @@ body {
 }
 
 .container-resultados__pronosticosemanal {
-    display: grid;
+    display: flex;
     justify-content: center;
     padding: 20px 10px;
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: #2c51d3;
     border-radius: 6px;
     margin: 30px 0px;
 }
@@ -141,6 +198,7 @@ body {
 .container-resultados__pronosticosemanal--container {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     background-color: var(--text-white-color);
     border-radius: 6px;
@@ -153,6 +211,7 @@ body {
 .container-resultados__pronosticosemanal--container-pronosticos {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
     max-width: 45vw;
     justify-content: center;
 }
@@ -172,6 +231,14 @@ body {
 .hoy {
     font-weight: 700;
 }
+
+.error {
+    font-weight: 600;
+    padding-left: 15px;
+    padding-top: 12px;
+    color: #f36b7f;
+}
+
 /*Menu*/
 
 header {
@@ -193,7 +260,6 @@ header {
     position: relative;
     left: 5px;
     top: 8px;
-    font-family: monospace;
 }
 
 header::after {
@@ -229,86 +295,44 @@ header::after {
     text-decoration: none;
 }
 
-.site-nav--icon {
-    display: inline-block;
-    font-size: 1.5em;
-    margin-right: 1em;
-    width: 1.1em;
-    text-align: right;
-    color: rgba(255, 255, 255, 0.918);
-}
-
 .menu-toggle {
     padding-bottom: 1em;
     padding-top: 1.08em;
     padding-left: 1em;
     padding-right: 1em;
     position: absolute;
-    top: 0.5em;
-    right: 0.5em;
-  }
-  .menu-open .hamburger {
+    margin-top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+.menu-open .hamburger {
     transform: rotate(45deg);
-  }
-  .menu-open .hamburger::before {
+}
+.menu-open .hamburger::before {
     opacity: 0;
-  }
-  .menu-open .hamburger::after {
+}
+.menu-open .hamburger::after {
     transform: translateY(-3px) rotate(-90deg);
-  }
-  .hamburger,
-  .hamburger::before,
-  .hamburger::after {
-    content: '';
+}
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+    content: "";
     display: block;
     background: black;
     height: 3px;
     width: 1.75em;
     border-radius: 3px;
     transition: all ease-in-out 500ms;
-  }
-  .hamburger::before {
+}
+.hamburger::before {
     transform: translateY(-6px);
-  }
-  .hamburger::after {
+}
+.hamburger::after {
     transform: translateY(3px);
-  }
-
-@media (min-width: 700px) {
-    .menu-toggle {
-        display: none;
-    }
-    .site-nav {
-        height: auto;
-        position: relative;
-        background: transparent;
-        float: right;
-        margin-right: 10px;
-        clip-path: initial;
-    }
-    .site-nav li {
-        display: inline-block;
-        border: none;
-    }
-
-    .site-nav a {
-        padding: 0;
-        margin-left: 3em;
-    }
-    .site-nav--icon {
-        display: none;
-    }
-    .site-nav a:hover,
-    .site-nav a:focus {
-        background: transparent;
-    }
-    
 }
 
-.hide {
-    display: none;
-}
-/*acerca de */
+/*Acerca de */
 
 .container-proyecto {
     display: flex;
@@ -343,6 +367,7 @@ header::after {
     width: 500px;
 }
 
+/*menu responsive */
 @media (min-width: 700px) {
     .menu-toggle {
         display: none;
@@ -372,7 +397,8 @@ header::after {
         background: transparent;
     }
 }
-@media screen and (max-width: 600px) {
+
+@media screen and (max-width: 480px) {
     .container-proyecto {
         display: flex;
         justify-content: center;
@@ -400,131 +426,200 @@ header::after {
         height: 250px;
     }
 }
-@media only screen and (max-width: 700px) {
-    .container {
-      display: grid;
-      grid-template-columns: 1fr;
+
+@media only screen and (min-width: 700px) {
+    .menu-toggle {
+        display: none;
     }
-  
-    .container-resultados__pronostico {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-  
-    .container-resultados__datosciudad {
-      align-items: center;
-    }
-    .container-resultados__datosciudad--info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-  
-    .container-resultados__pronosticosemanal--container-pronosticos {
-      display: flex;
-    }
-  
-    .container-resultados__pronosticosemanal--container-pronosticos {
-      min-width: 80vw;
-    }
-    header {
-      background: #f36b7f;
-      position: relative;
-      font-size: 12px;
-      padding-bottom: 1.5em;
-      font-family: sans-serif;
-    }
-  
-    .rose {
-      position: relative;
-      top: 13px;
-    }
-    .logo {
-      position: relative;
-      left: 5px;
-      top: 8px;
-      font-family: monospace;
-    }
-  
-    header::after {
-      content: '';
-      clear: both;
-      display: block;
-    }
-  
     .site-nav {
-      top: 100%;
-      right: 0;
-      position: absolute;
-      background: #f36b7f;
-      clip-path: circle(0px at top right);
-      transition: clip-path ease-in-out 700ms;
-    }
-    .site-nav-open {
-      clip-path: circle(150% at top right);
-    }
-    .site-nav ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
+        height: auto;
+        position: relative;
+        background: transparent;
+        float: right;
+        margin-right: 10px;
+        clip-path: initial;
     }
     .site-nav li {
-      border-bottom: 1px solid #575766;
+        display: inline-block;
+        border: none;
+    }
+
+    .site-nav a {
+        padding: 0;
+        margin-left: 3em;
+    }
+    .site-nav--icon {
+        display: none;
+    }
+    .site-nav a:hover,
+    .site-nav a:focus {
+        background: transparent;
+    }
+}
+/* acerca de responsive */
+@media screen and (max-width: 600px) {
+    .container-proyecto {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        background-color: #3040c4;
+    }
+    .container-acercade {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 30px;
+        height: 80%;
+        width: 80%;
+        border-radius: 6px;
+        background-color: #2c51d3;
+    }
+
+    .box {
+        margin: 30px;
+    }
+    .box img {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+/* containers responsive */
+@media only screen and (max-width: 700px) {
+    .container {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .container-fondo {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .container-resultados {
+        display: flex;
+        flex-flow: column;
+        padding: 15px;
+        justify-content: space-around;
+        background-color: transparent;
+        width: 90%;
+    }
+
+    .custom-search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        position: absolute;
+        left: 15px;
+    }
+
+    .container-resultados__pronostico {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .container-resultados__datosciudad {
+        align-items: center;
+    }
+    .container-resultados__datosciudad--info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .container-resultados__pronosticosemanal--container-pronosticos {
+        display: flex;
+    }
+
+    .container-resultados__pronosticosemanal--container-pronosticos {
+        min-width: 80vw;
+    }
+
+    header::after {
+        content: "";
+        clear: both;
+        display: block;
+    }
+
+    .site-nav {
+        top: 100%;
+        right: 0;
+        position: absolute;
+        background: #f36b7f;
+        clip-path: circle(0px at top right);
+        transition: clip-path ease-in-out 700ms;
+    }
+    .site-nav-open {
+        clip-path: circle(150% at top right);
+    }
+    .site-nav ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    .site-nav li {
+        border: none;
     }
     .site-nav li:last-child {
-      border-bottom: none;
+        border-bottom: none;
     }
     .site-nav a {
-      color: black;
-      display: block;
-      padding: 2em 4em;
-      text-decoration: none;
+        color: black;
+        display: block;
+        padding: 2em 4em;
+        text-decoration: none;
+        font-size: 0.9rem;
     }
-  
+
     .site-nav--icon {
-      display: inline-block;
-      font-size: 1.5em;
-      margin-right: 1em;
-      width: 1.1em;
-      text-align: right;
-      color: rgba(255, 255, 255, 0.918);
+        display: inline-block;
+        font-size: 1.5em;
+        margin-right: 1em;
+        width: 1.1em;
+        text-align: right;
+        color: rgba(255, 255, 255, 0.918);
+        cursor: pointer;
     }
-  
+
     .menu-toggle {
-      padding-bottom: 1em;
-      padding-top: 1.08em;
-      padding-left: 1em;
-      padding-right: 1em;
-      position: absolute;
-      top: 0.5em;
-      right: 0.5em;
+        padding-bottom: 1em;
+        padding-top: 1.08em;
+        padding-left: 1em;
+        padding-right: 1em;
+        position: absolute;
+        top: 0.5em;
+        right: 0.5em;
     }
     .menu-open .hamburger {
-      transform: rotate(45deg);
+        transform: rotate(45deg);
     }
     .menu-open .hamburger::before {
-      opacity: 0;
+        opacity: 0;
     }
     .menu-open .hamburger::after {
-      transform: translateY(-3px) rotate(-90deg);
+        transform: translateY(-3px) rotate(-90deg);
     }
     .hamburger,
     .hamburger::before,
     .hamburger::after {
-      content: '';
-      display: block;
-      background: black;
-      height: 3px;
-      width: 1.75em;
-      border-radius: 3px;
-      transition: all ease-in-out 500ms;
+        content: "";
+        display: block;
+        background: black;
+        height: 3px;
+        width: 1.75em;
+        border-radius: 3px;
+        transition: all ease-in-out 500ms;
     }
     .hamburger::before {
-      transform: translateY(-6px);
+        transform: translateY(-6px);
     }
     .hamburger::after {
-      transform: translateY(3px);
+        transform: translateY(3px);
     }
-  }
-  
+}
