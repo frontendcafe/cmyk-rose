@@ -70,7 +70,7 @@ fecha.textContent = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora)
 const mostrarError = function () {
     containerPronosticoFYH.style.display = "none";
     containerPronosticoSemanal.style.display = "none";
-    containerResultadosCiudad.textContent = `Ciudad no Encontrada`;
+    containerResultadosCiudad.innerHTML = `<div class="no-encontrada">Ciudad no Encontrada</div>`;
 };
 
 //insertar al DOM la ciudad y la temperatura
@@ -175,19 +175,19 @@ const obtenerDia = function (dia) {
 
 //pronostico
 const pronostico5 = async function (lat, lon) {
-  try {
-    const resPronostico = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=ad226a44dedb3b77340424c5a27e237d`
-    );
-    if (!resPronostico.ok)
-      throw new Error('Error en la busqueda del pronostico');
-    const dataPronostico = await resPronostico.json();
-    const data5 = dataPronostico.daily.splice(0, 5);
-    data5.forEach((dataDia) => mostrarPronostico(dataDia));
-  } catch (err) {
-    mostrarError(`${err.message}`);
-  }
-
+    try {
+        const resPronostico = await fetch(
+            `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
+        );
+        if (!resPronostico.ok)
+            throw new Error("Error en la busqueda del pronostico");
+        const dataPronostico = await resPronostico.json();
+        containerPronosticos.innerHTML = "";
+        const data5 = dataPronostico.daily.splice(0, 5);
+        data5.forEach((dataDia) => mostrarPronostico(dataDia));
+    } catch (err) {
+        mostrarError();
+    }
 };
 
 //consulta clima
@@ -202,7 +202,7 @@ const clima = async function (lat, lon) {
         insertarDOM(dataClima);
         fondoImg(dataClima.weather[0].description);
     } catch (err) {
-        mostrarError(`${err.message}`);
+        mostrarError();
     }
 };
 
@@ -214,7 +214,7 @@ const ciudadDondeEstoy = async function () {
         clima(lat, lon);
         pronostico5(lat, lon);
     } catch (err) {
-        mostrarError(err);
+        mostrarError();
     }
 };
 ciudadDondeEstoy();
@@ -223,6 +223,15 @@ ciudadDondeEstoy();
 const setFondoContainer = function (posImg) {
     containerFondo.style.backgroundImage = posImg;
     containerFondo.style.backgroundRepeat = "no-repeat";
+    const resize = () => {
+        if (innerWidth < 480) {
+            containerFondo.style.backgroundImage = "none";
+        } else {
+            containerFondo.style.backgroundImage = posImg;
+        }
+    };
+    addEventListener("resize", resize);
+    addEventListener("DOMContentLoaded", resize);
 };
 
 const contenedoresDia = function () {
@@ -233,58 +242,60 @@ const contenedoresDia = function () {
 };
 
 //Imagen background
-const fondoImg = function (msg) {
+const fondoImg = function (data) {
+    const ahora = new Date();
+    const opciones = {
+        hour: "numeric",
+        minute: "numeric",
+    };
 
-  const ahora = new Date();
-  const opciones = {
-    hour: 'numeric',
-    minute: 'numeric',
-  };
+    //idioma
+    const idiomaLocal = navigator.language;
+    const hora = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora);
 
-  //idioma
-  const idiomaLocal = navigator.language;
-  const hora = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora);
+    //refactorizando codigo ifs
 
-  //refactorizando codigo ifs
+    const imagPalabra = [
+        { descripcion: ["rotas"], url: "url('assets/bkg_images/mist.png')" },
+        {
+            descripcion: ["niebla", "nieblina", "nuboso", "bruma"],
+            url: "url('assets/bkg_images/mist.png')",
+        },
+        {
+            descripcion: ["dispersas", "nubes", "Algo de nubes"],
+            url: "url('assets/bkg_images/scatteredClouds.png')",
+        },
+        { descripcion: ["pocas"], url: "url('assets/bkg_images/fewClouds.png')" },
+        {
+            descripcion: ["nieve", "nevada ligera"],
+            url: "url('assets/bkg_images/snow.png')",
+        },
+        {
+            descripcion: ["despejado", "claro"],
+            url: "url('assets/bkg_images/clearSky_dia.png')",
+        },
+        {
+            descripcion: ["despejado", "claro"],
+            url: "url('assets/bkg_images/clearSky_noche.png')",
+        },
+        { descripcion: ["lluvia"], url: "url('assets/bkg_images/rain.png')" },
+        {
+            descripcion: ["aguacero"],
+            url: "url('assets/bkg_images/showerRain.png')",
+        },
+        { descripcion: ["tormenta"], url: "url('assets/bkg_images/main.png')" },
+    ];
 
-  const imagPalabra = [
-    { descripcion: ['rotas'], url: "url('assets/bkg_images/mist.png')" },
-    {
-      descripcion: ['niebla', 'nieblina', 'nuboso'],
-      url: "url('assets/bkg_images/mist.png')",
-    },
-    {
-      descripcion: ['dispersas', 'nubes'],
-      url: "url('assets/bkg_images/scatteredClouds.png')",
-    },
-    { descripcion: ['pocas'], url: "url('assets/bkg_images/fewClouds.png')" },
-    { descripcion: ['nieve'], url: "url('assets/bkg_images/snow.png')" },
-    {
-      descripcion: ['despejado', 'claro'],
-      url: "url('assets/bkg_images/clearSky_dia.png')",
-    },
-    {
-      descripcion: ['despejado', 'claro'],
-      url: "url('assets/bkg_images/clearSky_noche.png')",
-    },
-    { descripcion: ['lluvia'], url: "url('assets/bkg_images/rain.png')" },
-    {
-      descripcion: ['aguacero'],
-      url: "url('assets/bkg_images/showerRain.png')",
-    },
-    { descripcion: ['tormenta'], url: "url('assets/bkg_images/main.png')" },
-  ];
-
-  imagPalabra.forEach((el) => {
-    el['descripcion'].forEach((clima) => {
-      if (msg.includes(clima) && hora >= '06:00' && hora <= '18:00') {
-        setFondoContainer(el['url']);
-        contenedoresDia();
-      } else if (msg.includes(clima) && (hora > '18:00' || hora < '06:00')) {
-        setFondoContainer(el['url']);
-      }
+    imagPalabra.forEach((el) => {
+        el["descripcion"].forEach((clima) => {
+            if (data.includes(clima) && (hora >= "06:00" && hora <= "18:00")) {
+                setFondoContainer(el["url"]);
+                contenedoresDia();
+            } else if (data.includes(clima) && (hora > "18:00" || hora < "06:00")) {
+                setFondoContainer(el["url"]);
+            }
+        });
     });
-  });
 };
 
 //Efecto de Animacion Hamburguesa
@@ -308,6 +319,7 @@ button.addEventListener("click", function () {
             const response = await resBusquedaCiudad.json();
             insertarDOM(response);
             pronostico5(response.coord.lat, response.coord.lon);
+            fondoImg(response.weather[0].description);
         } catch (err) {
             mostrarError();
         }
