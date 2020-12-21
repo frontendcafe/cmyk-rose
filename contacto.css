@@ -54,7 +54,6 @@ header {
 
 .rose {
     position: relative;
-    top: 4px;
     width: 180px;
 }
 .logo {
@@ -207,14 +206,12 @@ header::after {
     header {
       background: #f36b7f;
       position: relative;
-      font-size: 12px;
       padding-bottom: 1.5em;
       font-family: sans-serif;
     }
   
     .rose {
       position: relative;
-      top: 13px;
     }
     .logo {
       position: relative;
