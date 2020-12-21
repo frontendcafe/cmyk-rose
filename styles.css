@@ -372,7 +372,8 @@ header::after {
         background: transparent;
     }
 }
-@media screen and (max-width: 600px) {
+
+@media screen and (max-width: 1250px) {
     .container-proyecto {
         display: flex;
         justify-content: center;
@@ -396,8 +397,8 @@ header::after {
         margin: 30px;
     }
     .box img {
-        width: 250px;
-        height: 250px;
+        width: 325px;
+        height: 300px;
     }
 }
 @media only screen and (max-width: 700px) {
@@ -527,4 +528,4 @@ header::after {
       transform: translateY(3px);
     }
   }
-  
+/*Contacto*/
