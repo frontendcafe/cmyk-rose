@@ -177,7 +177,7 @@ const obtenerDia = function (dia) {
 const pronostico5 = async function (lat, lon) {
     try {
         const resPronostico = await fetch(
-            `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=ad226a44dedb3b77340424c5a27e237d`
+            `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
         );
         if (!resPronostico.ok)
             throw new Error("Error en la busqueda del pronostico");
@@ -194,7 +194,7 @@ const pronostico5 = async function (lat, lon) {
 const clima = async function (lat, lon) {
     try {
         const resClima = await fetch(
-            `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&appid=ad226a44dedb3b77340424c5a27e237d`
+            `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&appid=${apiKey}`
         );
 
         if (!resClima.ok) throw new Error("Error en la busqueda del clima");
@@ -242,7 +242,7 @@ const contenedoresDia = function () {
 };
 
 //Imagen background
-const fondoImg = function (msg) {
+const fondoImg = function (data) {
     const ahora = new Date();
     const opciones = {
         hour: "numeric",
@@ -258,15 +258,18 @@ const fondoImg = function (msg) {
     const imagPalabra = [
         { descripcion: ["rotas"], url: "url('assets/bkg_images/mist.png')" },
         {
-            descripcion: ["niebla", "nieblina", "nuboso"],
+            descripcion: ["niebla", "nieblina", "nuboso", "bruma"],
             url: "url('assets/bkg_images/mist.png')",
         },
         {
-            descripcion: ["dispersas", "nubes"],
+            descripcion: ["dispersas", "nubes", "Algo de nubes"],
             url: "url('assets/bkg_images/scatteredClouds.png')",
         },
         { descripcion: ["pocas"], url: "url('assets/bkg_images/fewClouds.png')" },
-        { descripcion: ["nieve"], url: "url('assets/bkg_images/snow.png')" },
+        {
+            descripcion: ["nieve", "nevada ligera"],
+            url: "url('assets/bkg_images/snow.png')",
+        },
         {
             descripcion: ["despejado", "claro"],
             url: "url('assets/bkg_images/clearSky_dia.png')",
@@ -285,10 +288,10 @@ const fondoImg = function (msg) {
 
     imagPalabra.forEach((el) => {
         el["descripcion"].forEach((clima) => {
-            if (msg.includes(clima) && hora >= "06:00" && hora <= "18:00") {
+            if (data.includes(clima) && hora >= "06:00" && hora <= "18:00") {
                 setFondoContainer(el["url"]);
                 contenedoresDia();
-            } else if (msg.includes(clima) && (hora > "18:00" || hora < "06:00")) {
+            } else if (data.includes(clima) && (hora > "18:00" || hora < "06:00")) {
                 setFondoContainer(el["url"]);
             }
         });
@@ -316,6 +319,7 @@ button.addEventListener("click", function () {
             const response = await resBusquedaCiudad.json();
             insertarDOM(response);
             pronostico5(response.coord.lat, response.coord.lon);
+            fondoImg(response.weather[0].description);
         } catch (err) {
             mostrarError();
         }
