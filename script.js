@@ -294,6 +294,19 @@ const fondoImg = function (data) {
             } else if (data.includes(clima) && (hora > "18:00" || hora < "06:00")) {
                 setFondoContainer(el["url"]);
             }
+            if (
+                (data.includes("despejado") || data.includes("claro")) &&
+                hora > "06:00" &&
+                hora <= "18:00"
+            ) {
+                setFondoContainer("url('assets/bkg_images/clearSky_dia.png')");
+                contenedoresDia();
+            }
+            if (
+                (data.includes("despejado") || data.includes("claro")) &&
+                (hora > "18:00" || hora < "06:00")
+            )
+                return setFondoContainer("url('assets/bkg_images/clearSky_noche.png')");
         });
     });
 };
