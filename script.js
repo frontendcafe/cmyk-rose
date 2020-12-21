@@ -186,7 +186,7 @@ const pronostico5 = async function (lat, lon) {
         const data5 = dataPronostico.daily.splice(0, 5);
         data5.forEach((dataDia) => mostrarPronostico(dataDia));
     } catch (err) {
-        mostrarError(`${err.message}`);
+        mostrarError();
     }
 };
 
@@ -194,7 +194,7 @@ const pronostico5 = async function (lat, lon) {
 const clima = async function (lat, lon) {
     try {
         const resClima = await fetch(
-            `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&appid=${apiKey}`
+            `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&appid=ad226a44dedb3b77340424c5a27e237d`
         );
 
         if (!resClima.ok) throw new Error("Error en la busqueda del clima");
@@ -202,7 +202,7 @@ const clima = async function (lat, lon) {
         insertarDOM(dataClima);
         fondoImg(dataClima.weather[0].description);
     } catch (err) {
-        mostrarError(`${err.message}`);
+        mostrarError();
     }
 };
 
@@ -214,7 +214,7 @@ const ciudadDondeEstoy = async function () {
         clima(lat, lon);
         pronostico5(lat, lon);
     } catch (err) {
-        mostrarError(err);
+        mostrarError();
     }
 };
 ciudadDondeEstoy();
@@ -288,7 +288,7 @@ const fondoImg = function (data) {
 
     imagPalabra.forEach((el) => {
         el["descripcion"].forEach((clima) => {
-            if (data.includes(clima) && hora >= "06:00" && hora <= "18:00") {
+            if (data.includes(clima) && (hora >= "06:00" && hora <= "18:00")) {
                 setFondoContainer(el["url"]);
                 contenedoresDia();
             } else if (data.includes(clima) && (hora > "18:00" || hora < "06:00")) {
