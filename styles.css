@@ -398,6 +398,7 @@ header::after {
     }
 }
 
+
 @media screen and (max-width: 480px) {
     .container-proyecto {
         display: flex;
@@ -482,8 +483,8 @@ header::after {
         margin: 30px;
     }
     .box img {
-        width: 250px;
-        height: 250px;
+        width: 325px;
+        height: 300px;
     }
 }
 
@@ -622,4 +623,5 @@ header::after {
     .hamburger::after {
         transform: translateY(3px);
     }
-}
+  }
+
