@@ -223,7 +223,7 @@ ciudadDondeEstoy();
 const setFondoContainer = function (posImg) {
     const resize = () => {
         if (innerWidth < 500) {
-            containerFondo.style.backgroundColor = "none";
+            containerFondo.style.backgroundImage = "none";
         } 
         else {
              containerFondo.style.backgroundImage = posImg;
