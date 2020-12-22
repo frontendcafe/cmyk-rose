@@ -186,7 +186,7 @@ const pronostico5 = async function (lat, lon) {
         const data5 = dataPronostico.daily.splice(0, 5);
         data5.forEach((dataDia) => mostrarPronostico(dataDia));
     } catch (err) {
-        mostrarError(`${err.message}`);
+        mostrarError();
     }
 };
 
@@ -194,7 +194,7 @@ const pronostico5 = async function (lat, lon) {
 const clima = async function (lat, lon) {
     try {
         const resClima = await fetch(
-            `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&appid=${apiKey}`
+            `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&appid=ad226a44dedb3b77340424c5a27e237d`
         );
 
         if (!resClima.ok) throw new Error("Error en la busqueda del clima");
@@ -202,7 +202,7 @@ const clima = async function (lat, lon) {
         insertarDOM(dataClima);
         fondoImg(dataClima.weather[0].description);
     } catch (err) {
-        mostrarError(`${err.message}`);
+        mostrarError();
     }
 };
 
@@ -214,24 +214,27 @@ const ciudadDondeEstoy = async function () {
         clima(lat, lon);
         pronostico5(lat, lon);
     } catch (err) {
-        mostrarError(err);
+        mostrarError();
     }
 };
 ciudadDondeEstoy();
 
 //function backgroud
 const setFondoContainer = function (posImg) {
-    containerFondo.style.backgroundImage = posImg;
-    containerFondo.style.backgroundRepeat = "no-repeat";
     const resize = () => {
-        if (innerWidth < 480) {
+        if (innerWidth < 500) {
             containerFondo.style.backgroundImage = "none";
-        } else {
-            containerFondo.style.backgroundImage = posImg;
+        } 
+        else {
+             containerFondo.style.backgroundImage = posImg;
+             containerFondo.style.backgroundRepeat = "no-repeat"
         }
     };
+    resize();
     addEventListener("resize", resize);
     addEventListener("DOMContentLoaded", resize);
+
+    
 };
 
 const contenedoresDia = function () {
@@ -256,16 +259,22 @@ const fondoImg = function (data) {
     //refactorizando codigo ifs
 
     const imagPalabra = [
-        { descripcion: ["rotas"], url: "url('assets/bkg_images/mist.png')" },
         {
-            descripcion: ["niebla", "nieblina", "nuboso", "bruma"],
+            descripcion: ["rotas", "nuboso"],
+            url: "url('assets/bkg_images/brokenClouds.png')",
+        },
+        {
+            descripcion: ["niebla", "nieblina", "bruma"],
             url: "url('assets/bkg_images/mist.png')",
         },
         {
-            descripcion: ["dispersas", "nubes", "Algo de nubes"],
+            descripcion: ["Algo de", "nubes"],
+            url: "url('assets/bkg_images/fewClouds.png')",
+        },
+        {
+            descripcion: ["dispersas", "nubes"],
             url: "url('assets/bkg_images/scatteredClouds.png')",
         },
-        { descripcion: ["pocas"], url: "url('assets/bkg_images/fewClouds.png')" },
         {
             descripcion: ["nieve", "nevada ligera"],
             url: "url('assets/bkg_images/snow.png')",
@@ -294,6 +303,19 @@ const fondoImg = function (data) {
             } else if (data.includes(clima) && (hora > "18:00" || hora < "06:00")) {
                 setFondoContainer(el["url"]);
             }
+            if (
+                (data.includes("despejado") || data.includes("claro")) &&
+                hora > "06:00" &&
+                hora <= "18:00"
+            ) {
+                setFondoContainer("url('assets/bkg_images/clearSky_dia.png')");
+                contenedoresDia();
+            }
+            if (
+                (data.includes("despejado") || data.includes("claro")) &&
+                (hora > "18:00" || hora < "06:00")
+            )
+                return setFondoContainer("url('assets/bkg_images/clearSky_noche.png')");
         });
     });
 };
