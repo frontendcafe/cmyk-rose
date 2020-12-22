@@ -221,18 +221,19 @@ ciudadDondeEstoy();
 
 //function backgroud
 const setFondoContainer = function (posImg) {
-    containerFondo.style.backgroundImage = posImg;
-    containerFondo.style.backgroundRepeat = "no-repeat";
     const resize = () => {
         if (innerWidth < 500) {
-            containerFondo.style.backgroundImage = "none";
+            containerFondo.style.backgroundColor = "none";
         } 
         else {
-            containerFondo.style.backgroundImage = posImg;
+             containerFondo.style.backgroundImage = posImg;
+             containerFondo.style.backgroundRepeat = "no-repeat"
         }
     };
+    resize();
     addEventListener("resize", resize);
     addEventListener("DOMContentLoaded", resize);
+
     
 };
 
