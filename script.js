@@ -224,14 +224,16 @@ const setFondoContainer = function (posImg) {
     containerFondo.style.backgroundImage = posImg;
     containerFondo.style.backgroundRepeat = "no-repeat";
     const resize = () => {
-        if (innerWidth < 480) {
+        if (innerWidth < 500) {
             containerFondo.style.backgroundImage = "none";
-        } else {
+        } 
+        else {
             containerFondo.style.backgroundImage = posImg;
         }
     };
     addEventListener("resize", resize);
     addEventListener("DOMContentLoaded", resize);
+    
 };
 
 const contenedoresDia = function () {
@@ -294,6 +296,19 @@ const fondoImg = function (data) {
             } else if (data.includes(clima) && (hora > "18:00" || hora < "06:00")) {
                 setFondoContainer(el["url"]);
             }
+            if (
+                (data.includes("despejado") || data.includes("claro")) &&
+                hora > "06:00" &&
+                hora <= "18:00"
+            ) {
+                setFondoContainer("url('assets/bkg_images/clearSky_dia.png')");
+                contenedoresDia();
+            }
+            if (
+                (data.includes("despejado") || data.includes("claro")) &&
+                (hora > "18:00" || hora < "06:00")
+            )
+                return setFondoContainer("url('assets/bkg_images/clearSky_noche.png')");
         });
     });
 };

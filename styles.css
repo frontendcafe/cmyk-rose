@@ -245,7 +245,7 @@ input[type="search"] {
 
 header {
     background: #f36b7f;
-    height: 50px;
+    height: 60px;
     padding-top: 10px;
     padding-right: 40px;
     position: fixed;
@@ -536,7 +536,6 @@ header::after {
     .container-resultados__pronosticosemanal--container-pronosticos {
         min-width: 80vw;
     }
-
 }
 
 @media screen and (max-width: 1000px) {
@@ -579,12 +578,12 @@ header::after {
         margin: auto;
         display: block;
         position: relative;
-        left: 20px;
+        left: 10px;
     }
 
     .box img {
         width: 250px;
-        height: 250px;
+        height: 150px;
         align-items: center;
     }
 }
