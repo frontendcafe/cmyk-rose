@@ -663,13 +663,13 @@ header::after {
     width: 275px;
     height: 300px;
 }
-a {
+.contacto a {
     color: white;
     cursor: pointer;
     text-decoration: none;
 }
 
-a:hover {
+.contacto a:hover {
     color: #f8cf61;
 }
 
