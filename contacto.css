@@ -329,7 +329,7 @@ a{
     text-decoration: none;
 }
 
-a:hover{
+.contacto a:hover{
     color: #f8cf61;
 }
 
