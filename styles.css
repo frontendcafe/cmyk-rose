@@ -27,12 +27,10 @@ body {
     font-size: 14px;
 }
 
-
-
 .container {
     display: flex;
     justify-content: center;
-    padding-top: 60px;
+    padding-top: 40px;
     min-height: 100vh;
     width: 100%;
 }
@@ -40,10 +38,9 @@ body {
 .container-fondo {
     display: flex;
     justify-content: space-between;
-    column-gap: 10px;
-    row-gap: 1em;
     width: 100%;
     min-height: 90vh;
+    padding-top: 0px;
     background: left top no-repeat;
 }
 
@@ -54,6 +51,7 @@ body {
     justify-content: space-around;
     background-color: transparent;
     width: 50%;
+    min-height: 740px;
 }
 
 .container-buscador__clima {
@@ -75,7 +73,7 @@ body {
 input[type="search"] {
     width: 50%;
     height: 45px;
-    border-radius: 20px;
+    border-radius: 6px;
     background-color: #ffffff;
     outline: none;
     border: none;
@@ -254,7 +252,6 @@ header {
     top: 0;
     z-index: 1030;
     right: 0;
-
 }
 
 .rose {
@@ -272,7 +269,6 @@ header::after {
     clear: both;
     display: block;
 }
-
 
 .site-nav {
     top: 100%;
@@ -475,7 +471,7 @@ header::after {
         align-items: center;
     }
 
-    .about{
+    .about {
         margin: auto;
         display: block;
         position: relative;
@@ -499,19 +495,36 @@ header::after {
     .container-resultados {
         display: flex;
         flex-flow: column;
-        padding: 15px;
+        padding: 0 15px;
         justify-content: space-around;
         background-color: transparent;
         width: 90%;
     }
 
-    .custom-search {
+    .container-buscador__clima {
         display: flex;
+        flex-flow: column;
         justify-content: center;
         align-items: center;
+        margin-top: 10px;
+        padding-bottom: 10px;
+        width: 90%;
+        height: 100px;
+    }
+
+    .custom-search {
+        display: flex;
         width: 100%;
-        position: absolute;
-        left: 15px;
+        top: 80px;
+        left: 60px;
+    }
+
+    input[type="search"] {
+        width: 80%;
+    }
+
+    .btn {
+        margin-left: -80.5%;
     }
 
     .container-resultados__pronostico {
@@ -536,11 +549,10 @@ header::after {
     .container-resultados__pronosticosemanal--container-pronosticos {
         min-width: 80vw;
     }
-
 }
 
 @media screen and (max-width: 1000px) {
-    .about{
+    .about {
         margin: auto;
         display: block;
         position: relative;
@@ -549,7 +561,7 @@ header::after {
 }
 
 @media screen and (max-width: 950px) {
-    .about{
+    .about {
         margin: auto;
         display: block;
         position: relative;
@@ -558,7 +570,7 @@ header::after {
 }
 
 @media screen and (max-width: 800px) {
-    .about{
+    .about {
         margin: auto;
         display: block;
         position: relative;
@@ -566,7 +578,7 @@ header::after {
     }
 }
 @media screen and (max-width: 650px) {
-    .about{
+    .about {
         margin: auto;
         display: block;
         position: relative;
@@ -575,7 +587,7 @@ header::after {
 }
 
 @media screen and (max-width: 600px) {
-    .about{
+    .about {
         margin: auto;
         display: block;
         position: relative;
@@ -587,17 +599,23 @@ header::after {
         height: 250px;
         align-items: center;
     }
+    .custom-search {
+        display: flex;
+        width: 100%;
+        top: 80px;
+        left: 45px;
+    }
 }
 
-  /*Contacto*/
-  .container-contacto {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-  height: 100vh;
-  background-color: #3040c4;
+/*Contacto*/
+.container-contacto {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    background-color: #3040c4;
 }
 
 .contacto {
@@ -611,26 +629,26 @@ header::after {
     width: 275px;
     height: 300px;
 }
-a{
+a {
     color: white;
     cursor: pointer;
     text-decoration: none;
 }
 
-a:hover{
+a:hover {
     color: #f8cf61;
 }
 
-.contacto h2{
+.contacto h2 {
     color: #f8cf61;
     padding: 10px;
-   }
+}
 
 .contacto img {
     border: 5px solid white;
     border-radius: 50%;
     width: 100px;
-    height:100px;
+    height: 100px;
 }
 
 @media screen and (max-width: 700px) {
@@ -645,14 +663,14 @@ a:hover{
         height: 100%;
         background-color: #3040c4;
     }
-    .contacto{
+    .contacto {
         margin: 30%;
     }
 }
 @media screen and (max-width: 1200px) {
     .container-contacto {
         display: flex;
-        justify-content:center;
+        justify-content: center;
         flex-direction: row;
         padding: 0;
         margin: 40%;
@@ -660,9 +678,8 @@ a:hover{
         height: 50%;
         background-color: #3040c4;
     }
-    .contacto{
+    .contacto {
         margin-left: 10%;
         margin-right: 10%;
-    
     }
 }

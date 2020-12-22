@@ -256,16 +256,22 @@ const fondoImg = function (data) {
     //refactorizando codigo ifs
 
     const imagPalabra = [
-        { descripcion: ["rotas"], url: "url('assets/bkg_images/mist.png')" },
         {
-            descripcion: ["niebla", "nieblina", "nuboso", "bruma"],
+            descripcion: ["rotas", "nuboso"],
+            url: "url('assets/bkg_images/brokenClouds.png')",
+        },
+        {
+            descripcion: ["niebla", "nieblina", "bruma"],
             url: "url('assets/bkg_images/mist.png')",
         },
         {
-            descripcion: ["dispersas", "nubes", "Algo de nubes"],
+            descripcion: ["Algo de", "nubes"],
+            url: "url('assets/bkg_images/fewClouds.png')",
+        },
+        {
+            descripcion: ["dispersas", "nubes"],
             url: "url('assets/bkg_images/scatteredClouds.png')",
         },
-        { descripcion: ["pocas"], url: "url('assets/bkg_images/fewClouds.png')" },
         {
             descripcion: ["nieve", "nevada ligera"],
             url: "url('assets/bkg_images/snow.png')",
@@ -288,7 +294,7 @@ const fondoImg = function (data) {
 
     imagPalabra.forEach((el) => {
         el["descripcion"].forEach((clima) => {
-            if (data.includes(clima) && (hora >= "06:00" && hora <= "18:00")) {
+            if (data.includes(clima) && hora >= "06:00" && hora <= "18:00") {
                 setFondoContainer(el["url"]);
                 contenedoresDia();
             } else if (data.includes(clima) && (hora > "18:00" || hora < "06:00")) {
