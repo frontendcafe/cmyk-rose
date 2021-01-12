@@ -6,6 +6,8 @@ const apiKey = "ad226a44dedb3b77340424c5a27e237d";
 const containerApp = document.querySelector(".container");
 const containerFondo = document.querySelector(".container-fondo");
 const fecha = document.querySelector(".fechayhora");
+const menuBtn = document.querySelector('.menu-toggle');
+const topNav = document.querySelector('.site-nav');
 
 const containerResultadosCiudad = document.querySelector(".container-resultados__datosciudad");
 const containerPronosticoFYH = document.querySelector(".container-resultados__pronostico");
@@ -31,7 +33,7 @@ const kelvinACelsius = function (k) {
 };
 
 const celciusAFahrenheit = function (c) {
-    return Math.trunc(c * 1.8) + 32;
+    return Math.trunc(c * 9/5) + 32;
 };
 
 const fahrenheitACelcius = function (c) {
@@ -227,7 +229,7 @@ const fondoImg = function (data) {
 
     //idioma
     const idiomaLocal = navigator.language;
-    const hora = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora);
+    const hora = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora); 
 
     //refactorizando codigo ifs
 
@@ -280,6 +282,8 @@ const fondoImg = function (data) {
             } else if (data.includes(clima) && (hora > "18:00" || hora < "06:00")) {
                 setFondoContainer(el["url"]);
                 document.querySelector(".mensaje-error").classList.add("mensaje-error-color");
+                document.querySelector('.container-resultados__datosciudad--descripcionbtn').classList.add('btn_shadow');
+                document.querySelector('.btn').classList.add('btn_shadow');
             }
             if ((data.includes("despejado") || data.includes("claro")) && hora > "06:00" && hora <= "18:00") {
                 setFondoContainer("url('assets/bkg_images/clearSky_dia.png')");
@@ -311,3 +315,9 @@ button.addEventListener("click", function () {
     };
     buscarCiudad();
 });
+
+menuBtn.addEventListener('click', function () {
+    topNav.classList.toggle('site-nav-open');
+    menuBtn.classList.toggle('menu-open');
+})
+
