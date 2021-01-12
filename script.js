@@ -72,7 +72,7 @@ const insertarDOM = function (data) {
       <div class="container-resultados__datosciudad--info">
         <p class="container-resultados__datosciudad--temperatura">${kelvinACelsius(data.main.temp)}ºC</p>
         
-        <img class="container-resultados__datosciudad--icono" src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="">
+        <img class="container-resultados__datosciudad--icono" src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" alt="">
         
         <div class="container-resultados_datosciudad--descripcion">
           <p class="container-resultados__datosciudad--descripcionclima">${capitalizarPalabra(data.weather[0].description)}</p>
