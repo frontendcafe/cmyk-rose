@@ -129,7 +129,7 @@ const mostrarPronostico = function (data) {
       <p class="container-resultados__pronosticosemanal--pronosticos-dia">${capitalizarPalabra(obtenerDia(data.dt))}</p>
       <h2 class="container-resultados__pronosticosemanal--pronosticos-tempmax">${kelvinACelsius(data.temp.max)}ºC</h2>
       <h5 class="container-resultados__pronosticosemanal--pronosticos-tempmin">${kelvinACelsius(data.temp.min)}ºC</h5>
-      <img class="container-resultados__pronosticosemanal--pronosticos-icono" src="http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png">
+      <img class="container-resultados__pronosticosemanal--pronosticos-icono" src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png">
       <h5 class="container-resultados__pronosticosemanal--pronosticos-preci">Humedad:</h5>
       <h5 class="container-resultados__pronosticosemanal--pronosticos-preci">${data.humidity} %</h5>
     </div>
@@ -173,7 +173,7 @@ const pronostico5 = async function (lat, lon) {
 //consulta clima
 const clima = async function (lat, lon) {
     try {
-        const resClima = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&appid=${apiKey}`);
+        const resClima = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&appid=${apiKey}`);
 
         if (!resClima.ok) throw new Error("Error en la busqueda del clima");
         const dataClima = await resClima.json();
