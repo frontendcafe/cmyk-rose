@@ -175,6 +175,7 @@ var firebaseConfig = {
       menuBtn.classList.toggle('menu-open');
   })
 
+
   const containerAcercaDe = document.querySelector('.container-acercade')
   const fecha = document.querySelector('.fechayhora');
   const containerFondo = document.querySelector('.container');
@@ -185,10 +186,21 @@ var firebaseConfig = {
   const containerContactoMalau = document.querySelector('.contactoMalau');
   const containerContactoForm = document.querySelector('.contacto-form')
   const containerFormulario = document.querySelector('.formulario');
+  const modalCorrecto = document.querySelector('.modal-content');
+  const modalIncorrecto = document.querySelector('.modal-content_dos');
+  const modalIconoCorrecto = document.querySelector('#check');
+  const modalIconoincorrecto = document.querySelector('#check_dos');
+  const buttonEnviar = document.querySelector('.formulario__btn');
+  const buttonModalCorrecto = document.querySelector('.modal__btn')
+  const buttonModalIncorrecto = document.querySelector('.modal__btn_dos')
 
   const ahora = new Date();
+    const opciones = {
+        hour: "numeric",
+        minute: "numeric",
+    };
   const idiomaLocal = navigator.language;
-  const hora = new Intl.DateTimeFormat(idiomaLocal).format(ahora);
+  const hora = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora);
   
   const cambioColoresSecciones = function () {
      containerAcercaDe.style.backgroundColor = "#91C0FF";
@@ -200,20 +212,24 @@ var firebaseConfig = {
      containerContactoMalau.style.backgroundColor = "#91C0FF";
      containerContactoForm.style.backgroundColor = "#91C0FF";
      containerFormulario.style.backgroundColor = "#91C0FF";
+     modalCorrecto.style.backgroundColor = "#91C0FF";
+     modalIncorrecto.style.backgroundColor = "#91C0FF";
+     modalIconoCorrecto.style.color = "#06bb15"; 
+     modalIconoincorrecto.style.color = "#fc5e5e";
+     
     
      document.querySelectorAll('.formulario__grupo-correcto').forEach((coloresExito) => {
       coloresExito.classList.add('formulario__grupo-correcto-dia');
     });
     
-    document.querySelectorAll('.formulario__grupo-incorrecto').forEach((coloresError) => {
-      coloresError.classList.add('formulario__grupo-incorrecto-dia');
-    });
   }
-  inputs.forEach((input) => {
-    input.addEventListener('keyup', cambioColoresSecciones);
-    input.addEventListener('blur', cambioColoresSecciones);
-});
+  
   if(hora >= "06:00" && hora <= "18:00"){
       cambioColoresSecciones();
   }
   
+  else if (hora > "18:00" || hora < "06:00"){
+    buttonEnviar.classList.add('btn_shadow');
+    buttonModalCorrecto.classList.add('btn_shadow');
+    buttonModalIncorrecto.classList.add('btn_shadow');
+}

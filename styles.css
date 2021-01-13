@@ -526,20 +526,6 @@ textarea::placeholder {
     border: 3px solid #fa7373;
 }
 
-.formulario__grupo-incorrecto-dia .formulario__label {
-    color: #ff3b3b;
-}
-
-.formulario__grupo-incorrecto-dia .formulario__validacion-estado {
-    color: #ff3b3b;
-    opacity: 1;
-}
-
-.formulario__grupo-incorrecto-dia .formulario__input {
-    border: 3px solid #ff3b3b;
-}
-
-
 .formulario__grupo-correcto .formulario__validacion-estado {
     color: #1ed12d;
     opacity: 1;
@@ -554,15 +540,15 @@ textarea::placeholder {
 }
 
 .formulario__grupo-correcto-dia .formulario__input{
-    border: 3px solid #049a11;
+    border: 3px solid #06bb15;
 }
 
 .formulario__grupo-correcto-dia .formulario__label{
-    color: #049a11;
+    color: #06bb15;
 }
 
 .formulario__grupo-correcto-dia .formulario__validacion-estado{
-    color: #049a11;
+    color: #06bb15;
     opacity: 1;
 }
 
