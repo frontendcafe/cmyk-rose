@@ -2,7 +2,6 @@
 let button = document.querySelector(".btn");
 let inputValue = document.querySelector(".form-input");
 const apiKey = "ad226a44dedb3b77340424c5a27e237d";
-("use strict");
 const containerApp = document.querySelector(".container");
 const containerFondo = document.querySelector(".container-fondo");
 const fecha = document.querySelector(".fechayhora");
@@ -72,7 +71,7 @@ fecha.textContent = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora)
 const mostrarError = function () {
     containerPronosticoFYH.style.display = "none";
     containerPronosticoSemanal.style.display = "none";
-    containerError.style.display = "block";
+    containerError.style.display = "flex";
     containerResultadosCiudad.style.display = "none";
 };
 
@@ -266,10 +265,10 @@ const setFondoContainer = function (posImg) {
 };
 
 const contenedoresDia = function () {
-    containerApp.style.backgroundColor = "#c9def9";
-    containerPronosticoFYH.style.backgroundColor = "#91C0FF";
-    containerResultadosCiudad.style.backgroundColor = "#91C0FF";
-    containerPronosticoSemanal.style.backgroundColor = "#91C0FF";
+    containerApp.style.backgroundColor = "#abcdfa";
+    containerPronosticoFYH.style.backgroundColor = "#7bb1fa";
+    containerResultadosCiudad.style.backgroundColor = "#7bb1fa";
+    containerPronosticoSemanal.style.backgroundColor = "#7bb1fa";
 };
 //Imagen background
 const fondoImg = function (data) {
