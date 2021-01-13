@@ -378,3 +378,28 @@ a{
     
     }
 }
+/* Aqui esta la parte de los iconos de las redes sociales */
+.redes{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.redes ul{
+  position: relative;
+  display: flex;
+}
+
+.redes ul li{
+  position: relative;
+  list-style: none;
+}
+
+.redes ul li a {
+  position: relative;
+  width: 80px;
+  height:80px;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
