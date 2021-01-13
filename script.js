@@ -306,7 +306,6 @@ button.addEventListener("click", function () {
             const resBusquedaCiudad = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&lang=es&appid=${apiKey}`);
             const response = await resBusquedaCiudad.json();
             insertarDOM(response);
-            mostrarPronostico(response);
             pronostico5(response.coord.lat, response.coord.lon);
             fondoImg(response.weather[0].description);
         } catch (err) {
