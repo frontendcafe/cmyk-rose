@@ -5,22 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="assets/iconos/menu/icons8-partly-cloudy-day-48.png">
     <title>Rose Weather App</title>
+    <script defer src="script.js"></script>
+
 </head>
 
 <body>
     <div class="container">
         <header>
-            <img src="/assets/logo.png" alt="Logo Rose Weather" class="header-logo">
+            <img src="assets/logo.png" alt="Logo Rose Weather" class="header-logo">
             <nav id="site-nav" class="site-nav">
                 <ul>
                     <li><strong><a href="index.html">INICIO</a></strong></li>
-                    <li><strong><a href="about.html">PROYECTO</a></strong>
-                    </li>
-                    <li><strong><a href="contacto.html">CONTACTO</a></strong></li>
+                    <li><strong><a href="about.html" ">PROYECTO</a></strong>
+                </li>
+                <li><strong><a href=" contacto.html">CONTACTO</a></strong></li>
                 </ul>
             </nav>
-            <div id="menu-toggle" class="menu-toggle" onClick="cambiarClase()">
+            <div id="menu-toggle" class="menu-toggle">
                 <div class="hamburger"></div>
             </div>
         </header>
@@ -43,6 +46,10 @@
                             <h3 class="container-resultados__pronostico--titulo">Pronóstico</h3>
                             <p class="container-resultados__pronostico--fechayhora fechayhora"></p>
                         </div>
+                        <div class="container-error">
+                            <img src="assets/error.png" alt="Imagen 404" class="img-error">
+                            <p class="mensaje-error">No se encontro la ciudad :( </p>
+                        </div>
 
                         <div class="container-resultados__datosciudad shadow"></div>
                         <div class="container-resultados__pronosticosemanal shadow">
@@ -56,13 +63,11 @@
             </div>
         </main>
         <footer>
-            <p class="copyright">Hecho por el equipo 🌹 de CMYK ++ <a href="/"><img src="/assets/logoFE.svg"
-                        alt="Logo FrontendCafe"></a> Front End Café 2021
+            <p class="copyright">Hecho por el equipo 🌹 de CMYK ++ <a target="_blank" href="https://frontend.cafe/">
+                    <img src="assets/logoFE.svg" alt="Logo FrontendCafe"></a> Front End Café 2021
             </p>
         </footer>
-
     </div>
-    <script src="script.js"></script>
 </body>
 
 </html>

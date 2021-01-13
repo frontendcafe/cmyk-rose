@@ -1,15 +1,14 @@
 /** @format */
-
 let button = document.querySelector(".btn");
 let inputValue = document.querySelector(".form-input");
-let icon = document.querySelector(".icon");
-const ciudad = document.querySelector(".titulo");
 const apiKey = "ad226a44dedb3b77340424c5a27e237d";
 ("use strict");
 const containerApp = document.querySelector(".container");
 const containerFondo = document.querySelector(".container-fondo");
-const containerTitulo = document.querySelector(".container__titulo");
 const fecha = document.querySelector(".fechayhora");
+const menuBtn = document.querySelector(".menu-toggle");
+const topNav = document.querySelector(".site-nav");
+
 const containerResultadosCiudad = document.querySelector(
     ".container-resultados__datosciudad"
 );
@@ -23,6 +22,8 @@ const containerPronosticoSemanal = document.querySelector(
 const containerPronosticos = document.querySelector(
     ".container-resultados__pronosticosemanal--container-pronosticos"
 );
+
+const containerError = document.querySelector(".container-error");
 
 //Ubicación actual con geolocation y luego con geocode
 const obtenerUbicacionActual = function () {
@@ -40,7 +41,11 @@ const kelvinACelsius = function (k) {
 };
 
 const celciusAFahrenheit = function (c) {
-    return Math.trunc(c * 1.8) + 32;
+    return Math.trunc((c * 9) / 5) + 32;
+};
+
+const fahrenheitACelcius = function (c) {
+    return Math.trunc(((c - 32) * 5) / 9);
 };
 
 const capitalizarPalabra = function (palabra) {
@@ -61,11 +66,15 @@ const opciones = {
 //idioma
 
 const idiomaLocal = navigator.language;
-
 fecha.textContent = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora);
 
 //Mostrar error
-const mostrarError = function () {};
+const mostrarError = function () {
+    containerPronosticoFYH.style.display = "none";
+    containerPronosticoSemanal.style.display = "none";
+    containerError.style.display = "block";
+    containerResultadosCiudad.style.display = "none";
+};
 
 //insertar al DOM la ciudad y la temperatura
 const insertarDOM = function (data) {
@@ -77,7 +86,7 @@ const insertarDOM = function (data) {
             data.main.temp
         )}ºC</p>
         
-        <img class="container-resultados__datosciudad--icono" src="http://openweathermap.org/img/wn/${
+        <img class="container-resultados__datosciudad--icono" src="https://openweathermap.org/img/wn/${
             data.weather[0].icon
         }@2x.png" alt="">
         
@@ -94,6 +103,10 @@ const insertarDOM = function (data) {
     containerResultadosCiudad.innerHTML = "";
     containerResultadosCiudad.insertAdjacentHTML("beforeend", html);
 
+    cambiarTemperatura(data);
+};
+
+const cambiarTemperatura = function (data) {
     //Pasar de celsius a fahrenheit boton
     const celsiusAFahrenheitBtn = document.querySelector(
         ".container-resultados__datosciudad--descripcionbtn"
@@ -108,11 +121,38 @@ const insertarDOM = function (data) {
             kelvinACelsius(data.main.temp)
         )} F`;
 
+        const temperaturaCelsiusMax = document.getElementsByClassName(
+            "container-resultados__pronosticosemanal--pronosticos-tempmax"
+        );
+        const temperaturaCelsiusMin = document.getElementsByClassName(
+            "container-resultados__pronosticosemanal--pronosticos-tempmin"
+        );
+
         if (temperaturaCelsius.innerHTML !== fahrenheitTemp) {
             temperaturaCelsius.textContent = fahrenheitTemp;
+            for (let el of temperaturaCelsiusMax) {
+                el.textContent = `${celciusAFahrenheit(
+                    el.textContent.split("º")[0]
+                )} F`;
+            }
+            for (let el of temperaturaCelsiusMin) {
+                el.textContent = `${celciusAFahrenheit(
+                    el.textContent.split("º")[0]
+                )} F`;
+            }
             celsiusAFahrenheitBtn.textContent = `Ver en Celsius`;
         } else if (temperaturaCelsius.innerHTML === fahrenheitTemp) {
             temperaturaCelsius.textContent = `${kelvinACelsius(data.main.temp)}ºC`;
+            for (let el of temperaturaCelsiusMax) {
+                el.textContent = `${fahrenheitACelcius(
+                    el.textContent.split(" ")[0]
+                )}ºC`;
+            }
+            for (let el of temperaturaCelsiusMin) {
+                el.textContent = `${fahrenheitACelcius(
+                    el.textContent.split(" ")[0]
+                )}ºC`;
+            }
             celsiusAFahrenheitBtn.textContent = `Ver en Fahrenheit`;
         }
     });
@@ -121,28 +161,27 @@ const insertarDOM = function (data) {
 //Mostrar pronostico
 const mostrarPronostico = function (data) {
     const html = `
-  <div class="container-resultados__pronosticosemanal--pronosticos">
-    <p class="container-resultados__pronosticosemanal--pronosticos-dia">${capitalizarPalabra(
-        obtenerDia(data.dt)
-    )}</p>
-    <h2 class="container-resultados__pronosticosemanal--pronosticos-tempmax">${kelvinACelsius(
-        data.temp.max
-    )}ºC</h2>
-    <h5 class="container-resultados__pronosticosemanal--pronosticos-tempmin">${kelvinACelsius(
-        data.temp.min
-    )}ºC</h5>
-    <img class="container-resultados__pronosticosemanal--pronosticos-icono" src="http://openweathermap.org/img/wn/${
-        data.weather[0].icon
-    }@2x.png">
-    <h5 class="container-resultados__pronosticosemanal--pronosticos-preci">Humedad:</h5>
-    <h5 class="container-resultados__pronosticosemanal--pronosticos-preci">${
-        data.humidity
-    } %</h5>
-  </div>
-  `;
+    <div class="container-resultados__pronosticosemanal--pronosticos">
+      <p class="container-resultados__pronosticosemanal--pronosticos-dia">${capitalizarPalabra(
+          obtenerDia(data.dt)
+      )}</p>
+      <h2 class="container-resultados__pronosticosemanal--pronosticos-tempmax">${kelvinACelsius(
+          data.temp.max
+      )}ºC</h2>
+      <h5 class="container-resultados__pronosticosemanal--pronosticos-tempmin">${kelvinACelsius(
+          data.temp.min
+      )}ºC</h5>
+      <img class="container-resultados__pronosticosemanal--pronosticos-icono" src="https://openweathermap.org/img/wn/${
+          data.weather[0].icon
+      }@2x.png">
+      <h5 class="container-resultados__pronosticosemanal--pronosticos-preci">Humedad:</h5>
+      <h5 class="container-resultados__pronosticosemanal--pronosticos-preci">${
+          data.humidity
+      } %</h5>
+    </div>
+    `;
 
     containerPronosticos.insertAdjacentHTML("beforeend", html);
-
     const dataHoy = document.querySelector(
         ".container-resultados__pronosticosemanal--pronosticos-dia"
     );
@@ -187,7 +226,7 @@ const pronostico5 = async function (lat, lon) {
 const clima = async function (lat, lon) {
     try {
         const resClima = await fetch(
-            `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&appid=${apiKey}`
+            `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&appid=${apiKey}`
         );
 
         if (!resClima.ok) throw new Error("Error en la busqueda del clima");
@@ -232,7 +271,6 @@ const contenedoresDia = function () {
     containerResultadosCiudad.style.backgroundColor = "#91C0FF";
     containerPronosticoSemanal.style.backgroundColor = "#91C0FF";
 };
-
 //Imagen background
 const fondoImg = function (data) {
     const ahora = new Date();
@@ -292,8 +330,20 @@ const fondoImg = function (data) {
             if (data.includes(clima) && hora >= "06:00" && hora <= "18:00") {
                 setFondoContainer(el["url"]);
                 contenedoresDia();
+                document
+                    .querySelector(".mensaje-error")
+                    .classList.remove("mensaje-error-color");
             } else if (data.includes(clima) && (hora > "18:00" || hora < "06:00")) {
                 setFondoContainer(el["url"]);
+                document
+                    .querySelector(".mensaje-error")
+                    .classList.add("mensaje-error-color");
+                document
+                    .querySelector(
+                        ".container-resultados__datosciudad--descripcionbtn"
+                    )
+                    .classList.add("btn_shadow");
+                document.querySelector(".btn").classList.add("btn_shadow");
             }
             if (
                 (data.includes("despejado") || data.includes("claro")) &&
@@ -314,19 +364,12 @@ const fondoImg = function (data) {
     });
 };
 
-//Efecto de Animacion Hamburguesa
-
-function cambiarClase() {
-    let topnav = document.getElementById("site-nav");
-    topnav.classList.toggle("site-nav-open");
-    let menuOpen = document.getElementById("menu-toggle");
-    menuOpen.classList.toggle("menu-open");
-}
-
 //buscador de ciudad
 button.addEventListener("click", function () {
     containerPronosticoFYH.style.display = "flex";
     containerPronosticoSemanal.style.display = "block";
+    containerResultadosCiudad.style.display = "block";
+    containerError.style.display = "none";
     const buscarCiudad = async function () {
         try {
             const resBusquedaCiudad = await fetch(
@@ -341,4 +384,9 @@ button.addEventListener("click", function () {
         }
     };
     buscarCiudad();
+});
+
+menuBtn.addEventListener("click", function () {
+    topNav.classList.toggle("site-nav-open");
+    menuBtn.classList.toggle("menu-open");
 });
