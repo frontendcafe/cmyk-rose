@@ -171,65 +171,93 @@ var firebaseConfig = {
   }
   
   menuBtn.addEventListener('click', function () {
-      topNav.classList.toggle('site-nav-open');
-      menuBtn.classList.toggle('menu-open');
-  })
+    topNav.classList.toggle('site-nav-open');
+    menuBtn.classList.toggle('menu-open');
+})
 
 
-  const containerAcercaDe = document.querySelector('.container-acercade')
-  const fecha = document.querySelector('.fechayhora');
-  const containerFondo = document.querySelector('.container');
-  const containerContacto = document.querySelector('.container-contacto-titulo');
-  const containerContactoAlan = document.querySelector('.contactoAlan');
-  const containerContactoLupis = document.querySelector('.contactoLupis');
-  const containerContactoSanti = document.querySelector('.contactoSanti');
-  const containerContactoMalau = document.querySelector('.contactoMalau');
-  const containerContactoForm = document.querySelector('.contacto-form')
-  const containerFormulario = document.querySelector('.formulario');
-  const modalCorrecto = document.querySelector('.modal-content');
-  const modalIncorrecto = document.querySelector('.modal-content_dos');
-  const modalIconoCorrecto = document.querySelector('#check');
-  const modalIconoincorrecto = document.querySelector('#check_dos');
-  const buttonEnviar = document.querySelector('.formulario__btn');
-  const buttonModalCorrecto = document.querySelector('.modal__btn')
-  const buttonModalIncorrecto = document.querySelector('.modal__btn_dos')
+const containerAcercaDe = document.querySelector('.container-acercade')
+const fecha = document.querySelector('.fechayhora');
+const containerFondo = document.querySelector('.container');
+const containerContacto = document.querySelector('.container-contacto-titulo');
+const containerContactoAlan = document.querySelector('.contactoAlan');
+const containerContactoLupis = document.querySelector('.contactoLupis');
+const containerContactoSanti = document.querySelector('.contactoSanti');
+const containerContactoMalau = document.querySelector('.contactoMalau');
+const containerContactoForm = document.querySelector('.contacto-form')
+const containerFormulario = document.querySelector('.formulario');
+const modalCorrecto = document.querySelector('.modal-content');
+const modalIncorrecto = document.querySelector('.modal-content_dos');
+const modalIconoCorrecto = document.querySelector('#check');
+const modalIconoincorrecto = document.querySelector('#check_dos');
+const buttonEnviar = document.querySelector('.formulario__btn');
+const buttonModalCorrecto = document.querySelector('.modal__btn')
+const buttonModalIncorrecto = document.querySelector('.modal__btn_dos')
 
-  const ahora = new Date();
-    const opciones = {
-        hour: "numeric",
-        minute: "numeric",
-    };
-  const idiomaLocal = navigator.language;
-  const hora = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora);
+const ahora = new Date();
+  const opciones = {
+      hour: "numeric",
+      minute: "numeric",
+  };
+const idiomaLocal = navigator.language;
+const hora = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora);
+
+const cambioColoresSecciones = function () {
+   containerAcercaDe.style.backgroundColor = "#91C0FF";
+   containerFondo.style.backgroundColor =  "#c9def9";
+   if(containerContacto){
+      containerContacto.style.backgroundColor = "#91C0FF";
+   }
+   if(containerContactoAlan){
+      containerContactoAlan.style.backgroundColor = "#91C0FF";
+   }
+   if(containerContactoLupis){
+      containerContactoLupis.style.backgroundColor = "#91C0FF";
+   }
+   if(containerContactoSanti){
+      containerContactoSanti.style.backgroundColor = "#91C0FF";
+   }
+   if(containerContactoMalau){
+      containerContactoMalau.style.backgroundColor = "#91C0FF";
+   }
+   if(containerContactoForm){
+      containerContactoForm.style.backgroundColor = "#91C0FF";
+   }
+   if(containerFormulario){
+      containerFormulario.style.backgroundColor = "#91C0FF";
+   }
+   if(modalCorrecto){
+      modalCorrecto.style.backgroundColor = "#91C0FF";
+   }
+   if(modalIncorrecto){
+      modalIncorrecto.style.backgroundColor = "#91C0FF";
+   }
+   if(modalIconoCorrecto){
+      modalIconoCorrecto.style.color = "#06bb15"; 
+   }
+   if(modalIconoincorrecto){
+      modalIconoincorrecto.style.color = "#fc5e5e";
+   }
+   
   
-  const cambioColoresSecciones = function () {
-     containerAcercaDe.style.backgroundColor = "#91C0FF";
-     containerFondo.style.backgroundColor =  "#c9def9";
-     containerContacto.style.backgroundColor = "#91C0FF";
-     containerContactoAlan.style.backgroundColor = "#91C0FF";
-     containerContactoLupis.style.backgroundColor = "#91C0FF";
-     containerContactoSanti.style.backgroundColor = "#91C0FF";
-     containerContactoMalau.style.backgroundColor = "#91C0FF";
-     containerContactoForm.style.backgroundColor = "#91C0FF";
-     containerFormulario.style.backgroundColor = "#91C0FF";
-     modalCorrecto.style.backgroundColor = "#91C0FF";
-     modalIncorrecto.style.backgroundColor = "#91C0FF";
-     modalIconoCorrecto.style.color = "#06bb15"; 
-     modalIconoincorrecto.style.color = "#fc5e5e";
-     
-    
-     document.querySelectorAll('.formulario__grupo-correcto').forEach((coloresExito) => {
-      coloresExito.classList.add('formulario__grupo-correcto-dia');
-    });
-    
+   document.querySelectorAll('.formulario__grupo-correcto').forEach((coloresExito) => {
+    coloresExito.classList.add('formulario__grupo-correcto-dia');
+  });
+  
+}
+
+if(hora >= "06:00" && hora <= "18:00"){
+    cambioColoresSecciones();
+}
+
+else if (hora > "18:00" || hora < "06:00"){
+  if(buttonEnviar){
+  buttonEnviar.classList.add('btn_shadow');
   }
-  
-  if(hora >= "06:00" && hora <= "18:00"){
-      cambioColoresSecciones();
+  if(buttonModalCorrecto){
+  buttonModalCorrecto.classList.add('btn_shadow');
   }
-  
-  else if (hora > "18:00" || hora < "06:00"){
-    buttonEnviar.classList.add('btn_shadow');
-    buttonModalCorrecto.classList.add('btn_shadow');
-    buttonModalIncorrecto.classList.add('btn_shadow');
+  if(buttonModalIncorrecto){
+  buttonModalIncorrecto.classList.add('btn_shadow');
+  }
 }
