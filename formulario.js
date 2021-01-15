@@ -22,6 +22,26 @@ var firebaseConfig = {
   
   const menuBtn = document.querySelector('.menu-toggle');
   const topNav = document.querySelector('.site-nav');
+  const containerAcercaDe = document.querySelector('.container-acercade')
+  const fecha = document.querySelector('.fechayhora');
+  const containerFondo = document.querySelector('.container');
+  const containerContacto = document.querySelector('.container-contacto-titulo');
+  const Page = document.querySelector('.page');
+  const containerRight = document.querySelector('.right');
+  const containerLeft = document.querySelector('.left')
+  const containerContactoAlan = document.querySelector('.contactoAlan');
+  const containerContactoLupis = document.querySelector('.contactoLupis');
+  const containerContactoSanti = document.querySelector('.contactoSanti');
+  const containerContactoMalau = document.querySelector('.contactoMalau');
+  const containerContactoForm = document.querySelector('.contacto-form')
+  const containerFormulario = document.querySelector('.formulario');
+  const modalCorrecto = document.querySelector('.modal-content');
+  const modalIncorrecto = document.querySelector('.modal-content_dos');
+  const modalIconoCorrecto = document.querySelector('#check');
+  const modalIconoincorrecto = document.querySelector('#check_dos');
+  const buttonEnviar = document.querySelector('.formulario__btn');
+  const buttonModalCorrecto = document.querySelector('.modal__btn')
+  const buttonModalIncorrecto = document.querySelector('.modal__btn_dos')
 
   function submitForm(e) {
     e.preventDefault();
@@ -34,7 +54,7 @@ var firebaseConfig = {
     saveContactInfo(name, email, message);
     if(campos.nombre == true && campos.correo == true){
       sendEmail(name, email, message);
-      sendEmail_dos(name, email, message);
+      sendEmail_dos(name, email, message); 
   }
     modal();
   }
@@ -104,8 +124,9 @@ var firebaseConfig = {
           document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-incorrecto');
           document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-incorrecto-dia');
           document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-correcto');
-          document.querySelector(`#grupo__${campo} i`).classList.add('fa-check-circle');
-          document.querySelector(`#grupo__${campo} i`).classList.remove('fa-times-circle');
+          document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-correcto-dia');
+          document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.add('formulario__validacion-estado-activo');
+          document.querySelector(`#grupo__${campo} .formulario__validacion-estado-error`).classList.remove('formulario__validacion-estado-activo');
           document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.remove('formulario__input-error-activo');
           campos[campo] = true;
     
@@ -115,8 +136,8 @@ var firebaseConfig = {
           document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-incorrecto');
           document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-correcto');
           document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-correcto-dia');
-          document.querySelector(`#grupo__${campo} i`).classList.add('fa-times-circle');
-          document.querySelector(`#grupo__${campo} i`).classList.remove('fa-check-circle');
+          document.querySelector(`#grupo__${campo} .formulario__validacion-estado`).classList.remove('formulario__validacion-estado-activo');
+          document.querySelector(`#grupo__${campo} .formulario__validacion-estado-error`).classList.add('formulario__validacion-estado-activo');
           document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add('formulario__input-error-activo');
           campos[campo] = false;
       }
@@ -131,12 +152,14 @@ var firebaseConfig = {
     let modal = document.getElementById("myModal");
     let modal_dos = document.getElementById("myModalDos");
   
-    if(campos.nombre == true && campos.correo == true){
-      document.querySelector(".formulario").reset();  
+    if(campos.nombre == true && campos.correo == true){ 
+      document.querySelector(".formulario").reset(); 
       document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
-       icono.classList.remove('formulario__grupo-correcto');
-     });
-         
+        icono.classList.remove('formulario__grupo-correcto');
+      }); 
+      document.querySelectorAll('.formulario__grupo-correcto-dia').forEach((icono_dia) => {
+        icono_dia.classList.remove('formulario__grupo-correcto-dia');
+      });     
          modal.style.display = "block";
          modal_dos.style.display = "none";
     }
@@ -175,25 +198,6 @@ var firebaseConfig = {
     menuBtn.classList.toggle('menu-open');
 })
 
-
-const containerAcercaDe = document.querySelector('.container-acercade')
-const fecha = document.querySelector('.fechayhora');
-const containerFondo = document.querySelector('.container');
-const containerContacto = document.querySelector('.container-contacto-titulo');
-const containerContactoAlan = document.querySelector('.contactoAlan');
-const containerContactoLupis = document.querySelector('.contactoLupis');
-const containerContactoSanti = document.querySelector('.contactoSanti');
-const containerContactoMalau = document.querySelector('.contactoMalau');
-const containerContactoForm = document.querySelector('.contacto-form')
-const containerFormulario = document.querySelector('.formulario');
-const modalCorrecto = document.querySelector('.modal-content');
-const modalIncorrecto = document.querySelector('.modal-content_dos');
-const modalIconoCorrecto = document.querySelector('#check');
-const modalIconoincorrecto = document.querySelector('#check_dos');
-const buttonEnviar = document.querySelector('.formulario__btn');
-const buttonModalCorrecto = document.querySelector('.modal__btn')
-const buttonModalIncorrecto = document.querySelector('.modal__btn_dos')
-
 const ahora = new Date();
   const opciones = {
       hour: "numeric",
@@ -203,8 +207,21 @@ const idiomaLocal = navigator.language;
 const hora = new Intl.DateTimeFormat(idiomaLocal, opciones).format(ahora);
 
 const cambioColoresSecciones = function () {
-   containerAcercaDe.style.backgroundColor = "#91C0FF";
-   containerFondo.style.backgroundColor =  "#c9def9";
+  if(containerRight){
+    containerRight.style.backgroundColor = "#91C0FF";
+  } 
+ if(containerLeft){
+   containerLeft.style.backgroundColor = "#91C0FF";
+ }
+  if(Page){
+    Page.style.backgroundColor =  "#c9def9";
+  }
+  if(containerAcercaDe){
+      containerAcercaDe.style.backgroundColor = "#91C0FF";
+  }
+  if(containerFondo){
+      containerFondo.style.backgroundColor =  "#c9def9";
+  }
    if(containerContacto){
       containerContacto.style.backgroundColor = "#91C0FF";
    }
@@ -233,10 +250,10 @@ const cambioColoresSecciones = function () {
       modalIncorrecto.style.backgroundColor = "#91C0FF";
    }
    if(modalIconoCorrecto){
-      modalIconoCorrecto.style.color = "#06bb15"; 
+      modalIconoCorrecto.style.filter = "invert(42%) sepia(85%) saturate(1490%) hue-rotate(92deg) brightness(102%) contrast(96%)"; 
    }
    if(modalIconoincorrecto){
-      modalIconoincorrecto.style.color = "#fc5e5e";
+      modalIconoincorrecto.style.filter = "invert(61%) sepia(73%) saturate(3627%) hue-rotate(325deg) brightness(107%) contrast(98%)";
    }
    
   

@@ -34,6 +34,7 @@ html {
 .container-resultados__pronostico,
 .container-resultados__datosciudad,
 .container-resultados__datosciudad--info,
+.container-resultados__datosciudad--ciudad,
 .container-resultados_datosciudad--descripcion,
 .container-resultados__pronosticosemanal--container,
 .container-resultados__pronosticosemanal--container-pronosticos,
@@ -44,6 +45,7 @@ html {
 .acercade-img,
 .acercade-img img,
 .container-contacto-miembros,
+.modal_dos,
 .contacto,
 footer {
     display: flex;
@@ -383,11 +385,22 @@ input[type="search"] {
     height: auto;
 }
 
+
+.right{
+    padding-top: 60px;
+}
+
 .contacto img {
     border: 5px solid white;
     border-radius: 50%;
     width: 100px;
     height: 100px;
+}
+
+.contacto .img-contacto{
+   border: none;
+   border-radius: 0;
+   
 }
 
 .contacto a {
@@ -398,6 +411,10 @@ input[type="search"] {
 
 .contacto a:hover {
     color: #f8cf61;
+}
+
+.titulo-miembros{
+    text-align: center;
 }
 
 .contactoAlan,
@@ -415,7 +432,26 @@ input[type="search"] {
     z-index: 9;
     margin-top: -60px;
     text-align: center;
+
 }
+
+
+#alan-linkedin, #lupis-linkedin, #santi-linkedin, #malau-linkedin{
+     height: 50px;
+     filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(60deg) brightness(107%) contrast(100%); 
+     position: relative;
+     right: 40px;
+     top: 20px;
+}   
+
+#alan-github, #lupis-github, #santi-github, #malau-github{
+    height: 50px;
+    filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(60deg) brightness(107%) contrast(100%); 
+    position: relative;
+    left: 40px;
+    bottom: 35px;
+}   
+
 /* formulario */
 
 .formulario {
@@ -494,13 +530,24 @@ textarea::placeholder {
     margin: 10 auto;
 }
 
-.formulario__validacion-estado {
+.formulario__validacion-estado-error {
+    height: 15px;
     position: absolute;
     right: 10px;
-    bottom: 34px;
+    bottom: 26px;
     z-index: 100;
-    font-size: 16px;
     opacity: 0;
+    filter: invert(65%) sepia(58%) saturate(2854%) hue-rotate(316deg) brightness(102%) contrast(96%);
+}
+
+.formulario__validacion-estado {
+    height: 15px;
+    position: absolute;
+    right: 10px;
+    bottom: 26px;
+    z-index: 100;
+    opacity: 0;
+    filter: invert(71%) sepia(60%) saturate(4273%) hue-rotate(80deg) brightness(102%) contrast(90%);
 }
 
 .formulario__mensaje,
@@ -541,29 +588,28 @@ textarea::placeholder {
     color: #fa7373;
 }
 
-.formulario__grupo-incorrecto .formulario__validacion-estado {
-    color: #fa7373;
-    opacity: 1;
-}
-
 .formulario__grupo-incorrecto .formulario__input {
     border: 3px solid #fa7373;
-}
-
-.formulario__grupo-correcto .formulario__validacion-estado {
-    color: #1ed12d;
-    opacity: 1;
-}
-
-.formulario__grupo-correcto .formulario__input {
-    border: 3px solid #1ed12d;
 }
 
 .formulario__grupo-correcto .formulario__label {
     color: #1ed12d;
 }
 
-.formulario__grupo-correcto-dia .formulario__input {
+
+.formulario__grupo-incorrecto .formulario__validacion-estado-activo{
+    opacity: 1;
+}
+
+ .formulario__grupo-correcto .formulario__validacion-estado-activo {
+    opacity: 1;
+}
+ 
+.formulario__grupo-correcto .formulario__input {
+    border: 3px solid #1ed12d;
+}
+
+ .formulario__grupo-correcto-dia .formulario__input {
     border: 3px solid #06bb15;
 }
 
@@ -574,35 +620,7 @@ textarea::placeholder {
 .formulario__grupo-correcto-dia .formulario__validacion-estado {
     color: #06bb15;
     opacity: 1;
-}
-
-/* The Modal (background) */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1030;
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-}
-
-/* Modal Content */
-.modal-content {
-    position: relative;
-    background-color: #2c51d3;
-    margin: auto;
-    padding: 0;
-    width: 30%;
-    height: 50%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.6s;
-}
+} 
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
@@ -627,56 +645,16 @@ textarea::placeholder {
     }
 }
 
-.modal-body {
-    padding: 2px 16px;
-    position: relative;
-    text-align: center;
-    color: white;
-}
-
-.modal-body h1 {
-    position: relative;
-    top: 10px;
-}
-
 #check {
-    font-size: 4em;
-    color: #7dec86;
+    height: 90px;
+    filter: invert(96%) sepia(69%) saturate(847%) hue-rotate(52deg) brightness(99%) contrast(87%);
     position: relative;
-    top: 30px;
-    left: 52px;
+    top: 68px;
+    left: 58px;
 }
 
-.modal__btn {
-    font-size: 15px;
-    width: 30%;
-    margin-top: 25px;
-    border: none;
-    padding: 12px 20px;
-    background-color: var(--resultados-color);
-    color: var(--main-bg-color);
-    border-radius: 3px;
-    transition: 0.2s ease-in-out;
-    font-weight: 700;
-    position: relative;
-    top: 77px;
-    left: 98px;
-    outline: transparent;
-    cursor: pointer;
-}
 
-.modal__btn:hover {
-    color: var(--main-bg-color);
-}
-
-#rose-modal {
-    position: relative;
-    width: 130px;
-    left: 103px;
-    top: 5px;
-}
-
-.modal_dos {
+.modal_dos, .modal {
     display: none;
     position: fixed;
     z-index: 1030;
@@ -691,18 +669,19 @@ textarea::placeholder {
 }
 
 /* Modal Content */
-.modal-content_dos {
+.modal-content_dos, .modal-content {
     position: relative;
     background-color: #2c51d3;
     margin: auto;
     padding: 0;
     width: 30%;
-    height: 50%;
+    height: 43%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.6s;
+    border-radius: 16px;
 }
 
 /* Add Animation */
@@ -728,15 +707,7 @@ textarea::placeholder {
     }
 }
 
-.modal-header_dos {
-    padding: 2px 16px;
-    background-color: #f36b7f;
-    color: white;
-    position: relative;
-    height: 15%;
-}
-
-.modal-body_dos {
+.modal-body_dos, .modal-body {
     padding: 2px 16px;
     position: relative;
     text-align: center;
@@ -747,18 +718,22 @@ textarea::placeholder {
     position: relative;
     top: 10px;
 }
+ .modal-body h1{
+     position: relative;
+     top: 30px;
+ }
 
 #check_dos {
-    font-size: 4em;
-    color: #fa7373;
+    height: 90px;
+    filter: invert(52%) sepia(24%) saturate(1089%) hue-rotate(314deg) brightness(106%) contrast(96%);
     position: relative;
-    top: 30px;
-    left: 52px;
+    top: 38px;
+    left: 58px;
 }
 
-.modal__btn_dos {
-    font-size: 15px;
-    width: 30%;
+.modal__btn_dos{
+    font-size: 17px;
+    width: 20%;
     margin-top: 25px;
     border: none;
     padding: 12px 20px;
@@ -769,20 +744,31 @@ textarea::placeholder {
     transition: 0.2s ease-in-out;
     font-weight: 700;
     position: relative;
-    top: 77px;
-    left: 98px;
+    top: 115px;
+    left: 180px;
     outline: transparent;
 }
 
-.modal__btn_dos:hover {
-    box-shadow: 3px 0px 30px rgba(163, 163, 163, 1);
+.modal__btn{
+    font-size: 17px;
+    width: 20%;
+    margin-top: 25px;
+    border: none;
+    padding: 12px 20px;
+    background-color: var(--resultados-color);
+    color: var(--main-bg-color);
+    border-radius: 16px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    font-weight: 700;
+    position: relative;
+    top: 155px;
+    left: 180px;
+    outline: transparent;
 }
 
-#rose-modal_dos {
-    position: relative;
-    width: 130px;
-    left: 103px;
-    top: 5px;
+.btn_shadow {
+    box-shadow: 3px 0px 30px rgba(163, 163, 163, 1);
 }
 
 footer {
@@ -896,9 +882,6 @@ footer img {
     justify-content: center;
     align-items: center;
     padding: 250px 0px;
-}
-
-.container-error img {
 }
 
 /*Extras*/
@@ -1270,6 +1253,7 @@ footer img {
         display: block;
         position: unset;
         margin: 0;
+        margin-bottom: 50px;
     }
 
     .main-contacto {
@@ -1284,4 +1268,113 @@ footer img {
     .container-contacto-titulo {
         text-align: center;
     }
+    
 }
+
+
+@media (min-width: 1133px) {
+    .container-resultados__datosciudad--ciudad{
+        position: relative;
+        left: 15px;
+    }
+}
+
+@media (min-width: 1250px){
+    .container-resultados__datosciudad--ciudad{
+        left: 35px;
+    }
+}
+
+@media (min-width: 1600px){
+    .container-resultados__datosciudad--ciudad{
+        left: 60px;
+    }
+} 
+
+@media only screen and (max-width: 1843px){
+    .modal-content_dos, .modal-content{
+        height: 100%;
+        max-height: 345px;
+        width: 100%;
+        max-width: 555px;
+    }
+    .modal__btn_dos{
+        top: 110px;
+        left: 170px;
+    }
+    .modal__btn{
+        top: 150px;
+        left: 170px;
+    }
+    
+}
+
+@media only screen and (min-width: 1843px){
+    .modal-content_dos, .modal-content{
+        height: 100%;
+        max-height: 345px;
+        width: 100%;
+        max-width: 555px;
+    }
+    .modal__btn_dos{
+        top: 110px;
+        left: 170px;
+    }
+    .modal__btn{
+        top: 150px;
+        left: 170px;
+    }
+    .container-resultados__datosciudad--ciudad{
+        left: 72px;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .modal-content_dos, .modal-content{
+        height: 100%;
+        max-height: 290px;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .modal__btn_dos{
+        top: 55px;
+        left: 150px;
+    }
+
+    .modal__btn{
+        top: 95px;
+        left: 150px;
+    }
+
+    #check_dos{
+        left: 50px;
+        top: 20px;
+    }
+    #check{
+        left: 50px;
+        top: 20px;
+    }
+
+    .modal-body h1{
+        top: 0;
+    }
+}
+
+@media only screen and (max-width: 550px){
+    .modal-content_dos, .modal-content{
+        height: 100%;
+        width: 100%;
+        max-height: 290px;
+        max-width: 400px;
+    }
+    .modal__btn_dos{
+        width: 25%;
+        left: 100px;
+    }
+    .modal__btn{
+        width: 25%;
+        left: 100px;
+    }
+}
+
