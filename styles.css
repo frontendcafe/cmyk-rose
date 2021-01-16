@@ -437,19 +437,19 @@ input[type="search"] {
 
 
 #alan-linkedin, #lupis-linkedin, #santi-linkedin, #malau-linkedin{
-     height: 50px;
+     height: 30px;
      filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(60deg) brightness(107%) contrast(100%); 
      position: relative;
-     right: 40px;
-     top: 20px;
+     right: 30px;
+     top: 30px;
 }   
 
 #alan-github, #lupis-github, #santi-github, #malau-github{
-    height: 50px;
+    height: 30px;
     filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(60deg) brightness(107%) contrast(100%); 
     position: relative;
-    left: 40px;
-    bottom: 35px;
+    left: 30px;
+    bottom: 4px;
 }   
 
 /* formulario */
@@ -650,7 +650,7 @@ textarea::placeholder {
     filter: invert(96%) sepia(69%) saturate(847%) hue-rotate(52deg) brightness(99%) contrast(87%);
     position: relative;
     top: 68px;
-    left: 58px;
+    left: 55px;
 }
 
 
@@ -728,7 +728,7 @@ textarea::placeholder {
     filter: invert(52%) sepia(24%) saturate(1089%) hue-rotate(314deg) brightness(106%) contrast(96%);
     position: relative;
     top: 38px;
-    left: 58px;
+    left: 55px;
 }
 
 .modal__btn_dos{
@@ -782,7 +782,7 @@ footer {
     background-color: var(--footer-bg-color);
 }
 footer::before {
-    background-image: url("/assets/footer_1.png");
+    background-image: url("./assets/footer_1.png");
     background-size: cover;
     content: "";
     width: 100%;
@@ -940,6 +940,9 @@ footer img {
 }
 
 @media only screen and (max-width: 1010px) {
+    .box{
+        margin-bottom: 30px;
+    }
     .row {
         display: flex;
         flex-direction: column;
@@ -1348,11 +1351,11 @@ footer img {
     }
 
     #check_dos{
-        left: 50px;
+        left: 48px;
         top: 20px;
     }
     #check{
-        left: 50px;
+        left: 48px;
         top: 20px;
     }
 
@@ -1397,6 +1400,14 @@ footer img {
     .container-acercade{
         margin-bottom: 50px;
     }
+}
 
+@media only screen and (min-width: 1134px) and (max-width: 1273px){
+    #malau-github{
+        bottom: 22px;
+    }
+    #malau-linkedin{
+        top: 13px;
+    }
 }
 
