@@ -379,6 +379,7 @@ button.addEventListener("click", function () {
             pronostico5(response.coord.lat, response.coord.lon);
             fondoImg(response.weather[0].description);
         } catch (err) {
+            console.log(err);
             mostrarError();
         }
     };
